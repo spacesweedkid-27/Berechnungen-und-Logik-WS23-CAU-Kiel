@@ -1,0 +1,70 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[ngerman]{babel} 
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts} 
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titling}
+
+
+\newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
+\newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
+\newcommand*{\gedanke}{\textbf{-- }}
+
+
+\pagestyle{plain}
+\allowdisplaybreaks
+
+\setlength{\droptitle}{-11em}
+\setlength{\jot}{12pt}
+
+\title{Berechnungen und Logik\\Hausaufgabenserie 1}
+\author{Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
+\date{}
+
+
+\begin{document}
+\maketitle
+
+\doublespacing
+\subsection*{A1}
+Definiere folgende Mengen: \(odd := \{2a+1 | a \in \mathbb Z\}\), \(even := \{2a | a \in \mathbb Z\}\)\\
+sei \(n \in \mathbb Z\), man sieht leicht, dass \(\{odd, even\}\) Partition über \(\mathbb Z\) ist.
+\subsubsection*{a)}
+Wir werden zeigen, dass für ein \(n\in odd\) gilt, dann \(n^2\in odd\) gilt. \\
+Es gilt per Definition: \(\forall n \in odd: \exists a \in \mathbb Z: 2a+1 = n\). \\
+Für dieses \(a\) gilt dann \(n^2 = (2a+1)^2 = 4a^2 + 4a + 1\). \\
+Da \(a \in \mathbb Z\) gilt: \(4a^2 \in even \wedge 4a \in even \wedge 1 \in odd\), somit ist \(4a^2 + 4a + 1\) ungerade, also \(n^2\) ungerade. \qed
+\subsubsection*{b)}
+Wir werden zeigen, dass für ein \(n^2\in odd\) gilt, dann \(n\in odd\) gilt. \\
+Hierfür zeigen wir die Kontraposition, also \(n \not\in odd \Longrightarrow n^2 \not\in odd\). \\
+Nach Voraussetzung ist die äquivalent zu: \(n \in even \Longrightarrow n^2 \in even\). \\
+Es gilt per Definition: \(\forall n \in even: \exists a \in \mathbb Z: 2a = n\). \\
+Für dieses \(a\) gilt dann \(n^2 = (2a)^2 = 4a^2 \in even\). Damit ist \(n^2\) gerade und die Kontraposition ist gezeigt \qed
+\subsection*{A2}
+\subsubsection*{a)}
+Gilt \(\mathbb N := \{1, 2, ...\}\) die Menge der natürlichen Zahlen ab 1, dann gilt: \[\mathbb N : \begin{cases}
+    1 \in \mathbb{N} \\
+    n \in \mathbb{N} \Rightarrow n+1 \in \mathbb{N}
+\end{cases}\]
+\subsubsection*{b)}
+WOP hatte noch keine Ahnung, weil ich noch nicht ins Skript richtig reingeschaut habe.
+\subsection*{A3}
+\subsubsection*{a)}
+3,6,9,12
+\subsubsection*{b)}
+etc.
+\subsection*{A4}
+trivial
+\subsection*{A5}
+Man sieht leicht, dass die Aussage für endliche Mengen gilt\\
+(es gilt \(|M| < 2^{|M|} = |\mathcal P(M)|\)). \\ \\ Per Induktion lässt sich die Aussage auch für abzählbar unendliche Mengen beweisen:\\
+Induktionsbasis: \(|\emptyset| = 0 < 1 = 2^{|\emptyset|} = |\mathcal P(\emptyset)|\). \\
+Induktionsschritt: Sei also angenommen für eine Menge \(M\), dass \(|M| < \mathcal{P}(M)\) gilt. Dann gilt für ein Element \(x \not\in M\):\\
+\(|M \cup \{x\}| = |M| + 1 < 2\cdot |\mathcal P (M)| \le |\mathcal P(M \cup \{x\})|\). Dies folgt aus der Überlegung, dass in der Potenzmenge von \(M \cup \{x\}\) mindestens alle Teilmengen von \(M\) vorkommen müssen. Des Weiteren müssen in dieser Menge auch alle Teilmengen von \(M\) liegen, welche noch dazu ein \(x\) bekommen, da diese Mengen dann Teilmengen von \(M \cup \{x\}\) sind. \\ \\
+Nun für überabzählbare Mengen: \\
+Betrachte \(M\) mit \(|M| = |\mathbb R|\): Es gilt \((\forall x \in M: \{x\} \in \mathcal P(M)) \wedge \emptyset \in \mathcal P(M)\), jedoch \(\emptyset \not \in M\), somit kann keine surjektive Funktion zwischen \(M\) und \(\mathcal P(M)\) existieren. \\ \\ Somit folgt die zu beweisene Aussage \qed \\ \\
+Man sieht leicht, dass der letzte Beweis auch für jegliche Kardinalität von \(M\) funktioniert, jedoch sind dies drei verschiedene Möglichkeiten, Teilbeweise der Allaussage zu beweisen, deswegen habe ich sie stehen gelassen.
+\end{document}
