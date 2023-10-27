@@ -12,6 +12,7 @@
 \newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
 \newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
 \newcommand*{\gedanke}{\textbf{-- }}
+\newcommand*{\gap}{\text{ }}
 
 
 \pagestyle{plain}
@@ -64,7 +65,12 @@ Man sieht leicht, dass die Aussage für endliche Mengen gilt\\
 Induktionsbasis: \(|\emptyset| = 0 < 1 = 2^{|\emptyset|} = |\mathcal P(\emptyset)|\). \\
 Induktionsschritt: Sei also angenommen für eine Menge \(M\), dass \(|M| < \mathcal{P}(M)\) gilt. Dann gilt für ein Element \(x \not\in M\):\\
 \(|M \cup \{x\}| = |M| + 1 < 2\cdot |\mathcal P (M)| \le |\mathcal P(M \cup \{x\})|\). Dies folgt aus der Überlegung, dass in der Potenzmenge von \(M \cup \{x\}\) mindestens alle Teilmengen von \(M\) vorkommen müssen. Des Weiteren müssen in dieser Menge auch alle Teilmengen von \(M\) liegen, welche noch dazu ein \(x\) bekommen, da diese Mengen dann Teilmengen von \(M \cup \{x\}\) sind. \\ \\
-Nun für überabzählbare Mengen: \\
-Betrachte \(M\) mit \(|M| = |\mathbb R|\): Es gilt \((\forall x \in M: \{x\} \in \mathcal P(M)) \wedge \emptyset \in \mathcal P(M)\), jedoch \(\emptyset \not \in M\), somit kann keine surjektive Funktion zwischen \(M\) und \(\mathcal P(M)\) existieren. \\ \\ Somit folgt die zu beweisene Aussage \qed \\ \\
-Man sieht leicht, dass der letzte Beweis auch für jegliche Kardinalität von \(M\) funktioniert, jedoch sind dies drei verschiedene Möglichkeiten, Teilbeweise der Allaussage zu beweisen, deswegen habe ich sie stehen gelassen.
+Nun für alle Mengen im allgemeinen, \gedanke also auch überabzählbare Mengen: \\
+Sei \(M\) Menge. Wir werden zeigen, dass keine Bijektion \(f: M \rightarrow \mathcal P (M)\) existiert, woraus \(|M| \ne |\mathcal P (M)|\) folgt. \\
+Nehme an, dass \(f\) wäre bijektiv. \\
+Definiere \(\Omega := \{ x \in M | x \not\in f(x)\}.\) Dann ist \(\Omega\) Teilmenge von \(M\), also Element von \(\mathcal P (M)\). Da \(f\) bijektiv ist, gilt: \(\Omega \in \text{img}(f)\), und damit\footnote[1]{Hier ist wichtig zu beachten, dass bei einer Bijektion immer genau ein Element der Urbildmenge eines Elements existiert, also ein Inverses}: \(f^\leftarrow (\Omega) \in M\). Dieses Inverse nennen wir \(\omega\). Für dieses gilt dann natürlich: \(f(\omega) = \Omega\). \\
+Jedoch gilt: \(\omega \not\in f(\omega)\) also \(\omega \not\in \Omega\), nach Definition von \(\Omega\). Die Annahme der Bijektivität führt somit zu dem Widerspruch \(\omega \in \Omega \wedge \omega \not\in \Omega\). \\
+Nun um den Fall \(|M| > |\mathcal P (M)|\) auszuschließen,\\
+betrachte \(f: M \rightarrow \mathcal P(M), x \mapsto \{x\}\). \(f\) ist injektiv aber nicht surjektiv.\\
+Somit gilt: \(|M| \le |\mathcal P (M)|\) insgesamt \(|M| < |\mathcal P (M)|\). \qed
 \end{document}
