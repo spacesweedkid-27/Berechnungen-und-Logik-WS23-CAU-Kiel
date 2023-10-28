@@ -51,14 +51,25 @@ Gilt \(\mathbb N := \{1, 2, ...\}\) die Menge der natürlichen Zahlen ab 1, dann
     n \in \mathbb{N} \Rightarrow n+1 \in \mathbb{N}
 \end{cases}\]
 \subsubsection*{b)}
-WOP hatte noch keine Ahnung, weil ich noch nicht ins Skript richtig reingeschaut habe.
+Vorausgesetzt, $\mathbb{N}$ ist wie oben definiert:\\
+Basiselemente: $aab$\\
+Induktionsregel: Es gilt $w=a^{n+1}b^{n}$ für alle $w \in L \subset \Sigma ^{*} $ mit $n \in \mathbb{N}$.
 \subsection*{A3}
 \subsubsection*{a)}
 3,6,9,12
 \subsubsection*{b)}
-etc.
+IA: Bekannt ist, dass $3 \in M$ gilt. Wir wissen also, dass für $n = 1$ $3n \in M$ gilt, da $3 \cdot 1 = 3 \in M$.\\
+IV: Sei $M'$ eine Menge, welche nach mehrfacher Anwendung der induktiven Regel erzeugt wurde und es gelte $m = 3n$ für alle $n \in \mathbb{N}$ und $m \in M'$.\\
+IS: Betrachte nun: $3(n+1) = 3n + 3 \cdot 1 = 3n + 3$.\\
+Nach IA ist bekannt, dass $3 \in M$ gilt und nach IV gilt $3n \in M'$.\\
+\qed
 \subsection*{A4}
-trivial
+$\{ ab, aaa, c \} \subset L_1$ \puffer \puffer \puffer \puffer \puffer \puffer \gap $L_1$ ist endlich.\\
+$\{ aa, bb, cc \} \subset L_2$ \puffer \puffer \puffer \puffer \puffer \puffer \gap \gap $L_2$ ist unendlich.\\
+$\{ ababab, aaaaaaaaa, ccc\} \subset L_3$ \puffer \puffer $L_3$ ist unendlich.\\
+$L_4 = \{ \}$ \puffer \puffer \puffer \puffer \puffer \puffer \puffer \puffer \puffer \gap $L_4$ ist endlich.\\
+$\{ aba, aaaa, ca \} \subset L_5$ \puffer \puffer \puffer \puffer \puffer $L_5$ ist unendlich.\\
+$\{ aa, bb, cc \} \subset L_6$ \puffer \puffer \puffer \puffer \puffer \puffer \gap $L_6$ ist unendlich.\\
 \subsection*{A5}
 Man sieht leicht, dass die Aussage für endliche Mengen gilt\\
 (es gilt \(|M| < 2^{|M|} = |\mathcal P(M)|\)). \\ \\ Per Induktion lässt sich die Aussage auch für abzählbar unendliche Mengen beweisen:\\
