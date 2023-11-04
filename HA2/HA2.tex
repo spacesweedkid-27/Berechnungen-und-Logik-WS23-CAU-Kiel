@@ -141,7 +141,6 @@ Not sure, ob wir \(f_M\) auch definieren müssen. \\
 \end{tabular}\\\\
 Not sure, ob wir \(f_M\) auch definieren müssen. \\
 Es gilt \(f=f_M\), da bei Eingaben \(a\in A\) keine undefinierten Zustände oder Ausgaben erzeugt werden können.\\
-
 \subsection*{A3}
 \begin{tabular}{l l || c c c | c c}
     \(Q = \{ in \}\) & \(A = \{0,1,2,3 \}\) & \(\delta, \alpha\) & \(q\in Q\)& \(a \in A\) & \(\delta(q,a)\)&\(\alpha(q,a)\)\\
@@ -150,7 +149,8 @@ Es gilt \(f=f_M\), da bei Eingaben \(a\in A\) keine undefinierten Zustände oder
     &&& in & 2 & in & 1\\
     &&& in & 3 & in & 0\\
 \end{tabular}
-
+Es gilt \(f = f_M\), da \(dom(f_M)\) die Domain von \(f_M\) derart einschränkt, dass nur valide Ausgaben nach \(f\) erzeugt werden können.\\
+\\Das ist falsch hier, das muss nochmal überarbeitet werden. Gedankenstütze, damit's mir später wieder einfällt: \(dom(f_M)\) muss erzeugt werden, dh es braucht einen zweiten Zustand, in denen invalide Eingaben hineingeleitet werden und zur fehlerhaften Terminierung der seq. Maschine führen.\\
 \subsection*{A4}
 Hier steht was.
 
