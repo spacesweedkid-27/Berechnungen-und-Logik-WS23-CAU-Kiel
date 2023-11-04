@@ -1,0 +1,157 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titling}
+
+
+\newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
+\newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
+\newcommand*{\gedanke}{\textbf{-- }}
+\newcommand*{\gap}{\text{ }}
+
+
+\pagestyle{plain}
+\allowdisplaybreaks
+
+\setlength{\droptitle}{-11em}
+\setlength{\jot}{12pt}
+
+\title{Berechnungen und Logik\\Hausaufgabenserie 2}
+\author{Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
+\date{}
+
+
+\begin{document}
+\maketitle
+
+\doublespacing
+
+\subsection*{A1}
+
+\subsubsection*{a)}
+
+\begin{tabular}{l l || c c c c c}
+    \( Q = \{ 0, 1, 2, 3 \} \) & \(A = \{a, b, c\}\)&\( \alpha, \delta \)&\( q \in Q \) & \( a \in A \) & \( \delta (q, a) \) & \( \alpha(q, a) \) \\ [0.5ex]
+    \(B = \{ \epsilon, a, b, c \} \) & \(q_I = 0\) &&0 & a & 1 & a \\
+    \( \iota = \epsilon\) & \(\omega = \epsilon\)&&0 & b & 2 & b \\
+    &&&0 & c & 3 & c \\
+    &&&1 & a & 1 & \(\epsilon\) \\
+    &&&1 & b & 2 & b \\
+    &&&1 & c & 3 & c \\
+    &&&2 & a & 1 & a \\
+    &&&2 & b & 2 & \( \epsilon \) \\
+    &&&2 & c & 3 & c \\
+    &&&3 & a & 1 & a \\
+    &&&3 & b & 2 & b \\
+    &&&3 & c & 3 & \( \epsilon \)\\[0.5ex]
+\end{tabular}\\
+Not sure, ob wir \(f_M\) auch definieren müssen. \\
+
+
+\subsubsection*{b)}
+\begin{flalign*}
+    f_M (abac) &= \epsilon \hat{\alpha} (0, abac) \omega ( \hat{\delta}(0,abac)) \\
+    &= \epsilon \hat{\alpha} (0,abac) \epsilon \\
+    &= \hat{\alpha} (0,abac) \\
+    &= \hat{\alpha} (0,aba) \alpha (\hat{\delta}(0,aba), c) \\
+    &= \hat{\alpha} (0,aba) \alpha (\delta (\hat{\delta}(0,ab),a), c) \\
+    &= \hat{\alpha} (0,aba) \alpha (\delta (\delta(\hat{\delta}(0,a), b) ,a), c) \\
+    &= \hat{\alpha} (0,aba) \alpha (\delta (\delta ( \delta(\hat{\delta}(0,\epsilon), a), b) ,a), c) \\
+    &= \hat{\alpha} (0,aba) \alpha (\delta (\delta ( \delta(0 , a), b) ,a), c) \\
+    &= \hat{\alpha} (0,aba) \alpha (\delta (\delta ( 1, b) ,a), c) \\
+    &= \hat{\alpha} (0,aba) \alpha (\delta (2 ,a), c) \\
+    &= \hat{\alpha} (0,aba) \alpha (1, c) \\
+    &= \hat{\alpha} (0,aba) c \\
+    &= \hat{\alpha} (0,ab) \alpha (\hat{\delta}(0, ab), a) c \\
+    &= \hat{\alpha} (0,ab) \alpha (\delta (\hat{\delta}(0, a), b), a) c \\
+    &= \hat{\alpha} (0,ab) \alpha (\delta (\delta (\hat{\delta}(0, \epsilon), a), b), a) c \\
+    &= \hat{\alpha} (0,ab) \alpha (\delta (\delta (0, a), b), a) c \\
+    &= \hat{\alpha} (0,ab) \alpha (\delta (1, b), a) c \\
+    &= \hat{\alpha} (0,ab) \alpha (2, a) c \\
+    &= \hat{\alpha} (0,ab) a c \\
+    &= \hat{\alpha} (0,a) \alpha (\hat{\delta}(0, a), b) a c \\
+    &= \hat{\alpha} (0,a) \alpha (\delta (\hat{\delta}(0, \epsilon), a), b) a c \\
+    &= \hat{\alpha} (0,a) \alpha (\delta (0, a), b) a c \\
+    &= \hat{\alpha} (0,a) \alpha (1, b) a c \\
+    &= \hat{\alpha} (0,a) b a c \\
+    &= \hat{\alpha} (0,\epsilon) \alpha (\hat{\delta}(0, \epsilon), a) b a c \\
+    &= \hat{\alpha} (0,\epsilon) \alpha (0, a) b a c \\
+    &= \hat{\alpha} (0,\epsilon) a b a c \\
+    &= \epsilon a b a c \\
+    &=  a b a c\\
+\\
+    f_M (caa) \text{ } &= \epsilon \hat{\alpha} (0, abac) \omega ( \hat{\delta}(0,ca)a) \\
+    & = \hat{\alpha}(0, ca) \alpha (\delta(\hat{\delta}(0,c)a)a) \\
+    &= \hat{\alpha}(0, ca) \alpha (\delta(\delta(\hat{\delta}(0, \epsilon)c)a)a) \\
+    &= \hat{\alpha}(0, ca) \alpha (\delta(\delta(0, c)a)a) \\
+    &= \hat{\alpha}(0, ca) \alpha (\delta(3, a)a) \\
+    &= \hat{\alpha}(0, ca) \alpha (1, a) \\
+    &= \hat{\alpha}(0, ca) \epsilon \\
+    &= \hat{\alpha}(0, c) \alpha (\hat{\delta}(0, c)a) \epsilon \\
+    &= \hat{\alpha}(0, c) \alpha (3, a) \epsilon \\
+    &= \hat{\alpha}(0, c) a \epsilon \\
+    &= \hat{\alpha}(0, \epsilon) \alpha (\hat{\delta}(0, \epsilon)c)a \epsilon \\
+    &= \hat{\alpha}(0, \epsilon) \alpha (0, c)a \epsilon \\
+    &= \hat{\alpha}(0, \epsilon) c a \epsilon \\
+    &= \epsilon c a \epsilon \\
+    &= c a\\
+\end{flalign*}
+
+\subsubsection*{c)}
+\( \{ w\in A^* \mid w = u^1 v^1 , u,v \in A \} \)
+
+\subsection*{A2}
+\begin{tabular}{l l || c c c}
+    && \(\omega\): & q & \(\omega (q) \)\\[0.5ex]
+    \hline
+    \( Q = \{ \epsilon, 0, 1, 2, 3 \} \)& \(A = \{0,1,2,3\}\) &&0 & 0 \\
+    \( B = \{0,1,2,3\} \) & \(q_I = \epsilon \)&&1 & 3 \\
+    \(\iota = \{0,1,2,3\}\)&&&2 & 2 \\
+    &&&3 & 1 \\[0.5ex]
+\end{tabular} \\
+
+\begin{tabular}{c | c c | c c}
+    \(\alpha, \delta\)&\(q \in Q\)&\(a \in A\)&\(\delta(q,a)\)&\(\alpha(q,a)\)\\
+    \hline
+    &\(\epsilon\)&0&0&0\\
+    &\(\epsilon\)&1&1&1\\
+    &\(\epsilon\)&2&2&2\\
+    &\(\epsilon\)&3&3&3\\
+    &0&0&0&0\\
+    &0&1&1&1\\
+    &0&2&2&2\\
+    &0&3&3&3\\
+    &1&0&1&0\\
+    &1&1&2&1\\
+    &1&2&3&2\\
+    &1&3&0&3\\
+    &2&0&2&0\\
+    &2&1&3&1\\
+    &2&2&0&2\\
+    &2&3&1&3\\
+    &3&0&3&0\\
+    &3&1&0&1\\
+    &3&2&1&2\\
+    &3&3&2&3\\
+\end{tabular}\\\\
+Not sure, ob wir \(f_M\) auch definieren müssen. \\
+Es gilt \(f=f_M\), da bei Eingaben \(a\in A\) keine undefinierten Zustände oder Ausgaben erzeugt werden können.\\
+
+\subsection*{A3}
+\begin{tabular}{l l || c c c | c c}
+    \(Q = \{ in \}\) & \(A = \{0,1,2,3 \}\) & \(\delta, \alpha\) & \(q\in Q\)& \(a \in A\) & \(\delta(q,a)\)&\(\alpha(q,a)\)\\
+    \(B = \{ \epsilon, 0,1,2,3 \}\) & \(q_I =\) in && in & 0 & in & 3\\
+    \(\iota = \epsilon\) & \(\omega = \epsilon\) && in & 1 & in & 2\\
+    &&& in & 2 & in & 1\\
+    &&& in & 3 & in & 0\\
+\end{tabular}
+
+\subsection*{A4}
+Hier steht was.
+
+\end{document}
