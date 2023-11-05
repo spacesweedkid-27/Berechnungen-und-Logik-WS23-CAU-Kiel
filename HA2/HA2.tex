@@ -50,9 +50,7 @@
     &&&3 & b & 2 & b \\
     &&&3 & c & 3 & \( \epsilon \)\\[0.5ex]
 \end{tabular}\\
-Not sure, ob wir \(f_M\) auch definieren müssen. \\
-
-
+\pagebreak
 \subsubsection*{b)}
 \begin{flalign*}
     f_M (abac) &= \epsilon \hat{\alpha} (0, abac) \omega ( \hat{\delta}(0,abac)) \\
@@ -84,7 +82,6 @@ Not sure, ob wir \(f_M\) auch definieren müssen. \\
     &= \hat{\alpha} (0,\epsilon) a b a c \\
     &= \epsilon a b a c \\
     &=  a b a c\\
-\\
     f_M (caa) \text{ } &= \epsilon \hat{\alpha} (0, abac) \omega ( \hat{\delta}(0,ca)a) \\
     & = \hat{\alpha}(0, ca) \alpha (\delta(\hat{\delta}(0,c)a)a) \\
     &= \hat{\alpha}(0, ca) \alpha (\delta(\delta(\hat{\delta}(0, \epsilon)c)a)a) \\
@@ -103,55 +100,67 @@ Not sure, ob wir \(f_M\) auch definieren müssen. \\
 \end{flalign*}
 
 \subsubsection*{c)}
-\( \{ w\in A^* \mid w = u^1 v^1 , u,v \in A \} \)
+\( \{w \in A^* \mid f_M(w) = w\} = \{wx \in A^* \mid wx = wu^1 v^1, u,v \in A, u \neq v\} \)
 
 \subsection*{A2}
-\begin{tabular}{l l || c c c}
-    && \(\omega\): & q & \(\omega (q) \)\\[0.5ex]
-    \hline
-    \( Q = \{ \epsilon, 0, 1, 2, 3 \} \)& \(A = \{0,1,2,3\}\) &&0 & 0 \\
-    \( B = \{0,1,2,3\} \) & \(q_I = \epsilon \)&&1 & 3 \\
-    \(\iota = \{0,1,2,3\}\)&&&2 & 2 \\
-    &&&3 & 1 \\[0.5ex]
-\end{tabular} \\
-
-\begin{tabular}{c | c c | c c}
-    \(\alpha, \delta\)&\(q \in Q\)&\(a \in A\)&\(\delta(q,a)\)&\(\alpha(q,a)\)\\
-    \hline
-    &\(\epsilon\)&0&0&0\\
-    &\(\epsilon\)&1&1&1\\
-    &\(\epsilon\)&2&2&2\\
-    &\(\epsilon\)&3&3&3\\
-    &0&0&0&0\\
-    &0&1&1&1\\
-    &0&2&2&2\\
-    &0&3&3&3\\
-    &1&0&1&0\\
-    &1&1&2&1\\
-    &1&2&3&2\\
-    &1&3&0&3\\
-    &2&0&2&0\\
-    &2&1&3&1\\
-    &2&2&0&2\\
-    &2&3&1&3\\
-    &3&0&3&0\\
-    &3&1&0&1\\
-    &3&2&1&2\\
-    &3&3&2&3\\
+\begin{tabular}{l l || c c c | c c}
+    \( Q = \{ \epsilon, 0, 1, 2, 3 \} \)& \(A = \{0,1,2,3\}\) & \(\alpha, \delta\)&\(q \in Q\)&\(a \in A\)&\(\delta(q,a)\)&\(\alpha(q,a)\)\\
+    \( B = \{0,1,2,3\} \) & \(q_I = \epsilon \)&&\(\epsilon\)&0&0&0\\
+    \(\iota = \{0,1,2,3\}\)&&&\(\epsilon\)&1&1&1\\
+    \(\omega\):&&&\(\epsilon\)&2&2&2\\
+    \(q \in Q\) & \(\omega (q) \)&&\(\epsilon\)&3&3&3\\
+    0&0&&0&0&0&0\\
+    1 & 3&&0&1&1&1\\
+    2 & 2&&0&2&2&2\\
+    3 & 1&&0&3&3&3\\
+    &&&1&0&1&0\\
+    &&&1&1&2&1\\
+    &&&1&2&3&2\\
+    &&&1&3&0&3\\
+    &&&2&0&2&0\\
+    &&&2&1&3&1\\
+    &&&2&2&0&2\\
+    &&&2&3&1&3\\
+    &&&3&0&3&0\\
+    &&&3&1&0&1\\
+    &&&3&2&1&2\\
+    &&&3&3&2&3\\
 \end{tabular}\\\\
-Not sure, ob wir \(f_M\) auch definieren müssen. \\
-Es gilt \(f=f_M\), da bei Eingaben \(a\in A\) keine undefinierten Zustände oder Ausgaben erzeugt werden können.\\
+In dieser Modellierung einer sequentiellen Maschine haben die die Zustände so gewählt, dass diese immer die aktuelle Summe der Eingaben nach
+den Voraussetzungen von \(f\) repräsentieren. Es ist die finale Ausgabefunktion \(\omega\) so gestaltet, dass in Abhängigkeit vom aktuellen
+Zustand - sprich, der aktuellen Summe der vorangegangenen Eingabewerte - genau die Ausgabe getätigt wird, die benötigt wird, um die Summe
+des Ausgabewortes auf 0 nach Voraussetzung zu bringen.\\
 \subsection*{A3}
 \begin{tabular}{l l || c c c | c c}
-    \(Q = \{ in \}\) & \(A = \{0,1,2,3 \}\) & \(\delta, \alpha\) & \(q\in Q\)& \(a \in A\) & \(\delta(q,a)\)&\(\alpha(q,a)\)\\
-    \(B = \{ \epsilon, 0,1,2,3 \}\) & \(q_I =\) in && in & 0 & in & 3\\
-    \(\iota = \epsilon\) & \(\omega = \epsilon\) && in & 1 & in & 2\\
-    &&& in & 2 & in & 1\\
-    &&& in & 3 & in & 0\\
-\end{tabular}
-Es gilt \(f = f_M\), da \(dom(f_M)\) die Domain von \(f_M\) derart einschränkt, dass nur valide Ausgaben nach \(f\) erzeugt werden können.\\
-\\Das ist falsch hier, das muss nochmal überarbeitet werden. Gedankenstütze, damit's mir später wieder einfällt: \(dom(f_M)\) muss erzeugt werden, dh es braucht einen zweiten Zustand, in denen invalide Eingaben hineingeleitet werden und zur fehlerhaften Terminierung der seq. Maschine führen.\\
-\subsection*{A4}
-Hier steht was.
-
+    \(Q = \{ \epsilon, !, 0, 1, 2, 3 \}\) & \(A = \{0,1,2,3 \}\) & \(\delta, \alpha\) & \(q\in Q\)& \(a \in A\) & \(\delta(q,a)\)&\(\alpha(q,a)\)\\
+    \(B = \{ \epsilon, 0,1,2,3 \}\) & \(q_I = \epsilon\) && \(\epsilon\) & 0 & 0 & 3\\
+    \(\iota = \epsilon\) &&& \(\epsilon\) & 1 & 1 & 2\\
+    \(\omega\):&&& \(\epsilon\) & 2 & 2 & 1\\
+    \(q \in Q \)&\(\omega (a)\)&& \(\epsilon\) & 3 & 3 & 0\\
+    \( 0 \)&\(\epsilon\)&& 0& 0 & 0 & 3\\
+    \( 1 \)& \(\epsilon\)&& 0 & 1 & 1 & 2\\
+    \(2\)& \(\epsilon\) & & 0 & 2 & ! & 1\\
+    3&\(\epsilon\)&&0&3&!&0\\
+    &&&1&0&0&3\\
+    &&&1&1&1&2\\
+    &&&1&2&2&1\\
+    &&&1&3&!&0\\
+    &&&2&0&!&3\\
+    &&&2&1&1&2\\
+    &&&2&2&2&1\\
+    &&&2&3&3&0\\
+    &&&3&0&!&3\\
+    &&&3&1&!&2\\
+    &&&3&2&2&1\\
+    &&&3&3&3&0\\
+    &&&!&0&!&3\\
+    &&&!&1&!&2\\
+    &&&!&2&!&1\\
+    &&&!&3&!&0\\
+\end{tabular}\\\\
+Es gilt \(f = f_M\), da in dieser sequentiellen Maschine der Zustand "!" der Art existiert, dass alle invaliden Eingaben - also solche, für die \(w \notin dom(f_M)\) gilt - durch diesen aufgefangen werden.
+"!" ist durch \(\omega\) nicht abgedeckt, da die sequentielle Maschine in diesem Zustand nicht terminiert - Ausgaben für Wörter, die nicht in der Domain von \(f_M\) sind, sind also undefiniert.
+Es ist denkbar, für Eingaben im Zustand ! das leere Wort als Ausgabe zu wählen, da, sobald dieser Zustand erreicht ist, die Maschine auf keinen Fall terminiert. 
+Wir haben uns in diesem Fall für eine Fortsetzung der regulären Ausgaben entschieden.\\
+Andere Voraussetzungen von \(f\) an \(f_M\) sind abgedeckt.
 \end{document}
