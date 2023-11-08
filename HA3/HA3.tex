@@ -1,0 +1,51 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[ngerman]{babel} 
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts} 
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titling}
+
+
+\newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
+\newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
+\newcommand*{\gedanke}{\textbf{-- }}
+
+
+\pagestyle{plain}
+\allowdisplaybreaks
+
+\setlength{\droptitle}{-11em}
+\setlength{\jot}{12pt}
+
+\title{Berechnungen und Logik\\Hausaufgabenserie 3}
+\author{Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
+\date{}
+
+
+\begin{document}
+\maketitle
+
+\doublespacing
+\subsection*{A1}
+\subsubsection*{a)}
+\(f_1\) erfüllt nicht das notwendige Kriterium des linear beschränktem Wachstums, denn es gilt folgendes: Für alle \(w \in A^*\) gilt: \(|f_1(w)| = |1^{|w|^2}| = |w|^2\).\\
+Des Weiteren gilt jedoch: \(\forall c \in \mathbb N: \exists w \in A^*: |w|^2 > c\cdot(|x| + 1)\), mit \(w : |w| = 2c > 0\), denn es gilt dann: \(|w|^2 = 4c^2 > 2c^2 + c\) (Beachte \(|w| > 0\)). \qed
+\subsubsection*{b)}
+\(f_2\) erfüllt auch nicht das notwendige Kriterium des linear beschränktem Wachstums. 
+Wir zeigen dafür \(\forall c \in \mathbb N: \exists w \in A^*: |f_2(w)| > c\cdot(|w| + 1)\) \\
+Hierfür wähle \(x := v_0v_1v_3 \dots v_n\) mit \(n := c\) und \(v_i \ne \epsilon\) für \(i \in [n]\), dann gilt:
+\(|f_2(w)| = n! = c!\) aufgrund der Definition von \(\cdot!\) und \(f_2\).
+\\Des Weiteren gilt: \(c! > c^2 + c\), was zu zeigen war. \qed
+\subsection*{A2}
+
+\subsection*{A3}
+Da \(f\) und \(\lambda : B^* \rightarrow B^*, w \mapsto wv\) sequenziell\footnote[1]{\(\lambda\) ist tatsächlich sequenziell, betrachte dafür die jeweiligen Identitätsfunktionen als Zustands und Ausgabefunktionen und \(\phi : Q \rightarrow B^*, q \mapsto v\) als die finale Ausgabefunktion, für \(Q := \{z_0\}\).} sind, gilt nach Bonusaufgabe 7, dass \(\tilde{f}\) sequenziell ist, da \(\tilde{f} = \lambda \circ f\) gilt. \qed
+\subsection*{A4}
+
+\subsection*{A7}
+maybe baby
+
+\end{document}
