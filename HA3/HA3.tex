@@ -36,9 +36,9 @@ Des Weiteren gilt jedoch: \(\forall c \in \mathbb N: \exists w \in A^*: |w|^2 > 
 \subsubsection*{b)}
 \(f_2\) erfüllt auch nicht das notwendige Kriterium des linear beschränktem Wachstums. 
 Wir zeigen dafür \(\forall c \in \mathbb N: \exists w \in A^*: |f_2(w)| > c\cdot(|w| + 1)\) \\
-Hierfür wähle \(x := v_0v_1v_3 \dots v_n\) mit \(n := c\) und \(v_i \ne \epsilon\) für \(i \in [n]\), dann gilt:
-\(|f_2(w)| = n! = c!\) aufgrund der Definition von \(\cdot!\) und \(f_2\).
-\\Des Weiteren gilt: \(c! > c^2 + c\), was zu zeigen war. \qed
+Hierfür wähle \(w := v_0v_1v_3 \dots v_n\) mit \(n := \max(2c, 2)\) und \(v_i \ne \epsilon\) für \(i \in [n]\), dann gilt: 
+\(|f_2(w)| = \frac{n^2 + n}{2} = \frac{4c^2 + 2c}{2} = 2c^2+c > 2c^2 + 2\) aufgrund der gaußschen Summenformel und der Definition von \(f_2\).
+\\Dann gilt: \(|f_2(w)| > c\cdot(|w| + 1)\), was zu zeigen war. \qed
 \subsection*{A2}
 
 \subsection*{A3}
