@@ -36,15 +36,37 @@ Des Weiteren gilt jedoch: \(\forall c \in \mathbb N: \exists w \in A^*: |w|^2 > 
 \subsubsection*{b)}
 \(f_2\) erfüllt auch nicht das notwendige Kriterium des linear beschränktem Wachstums. 
 Wir zeigen dafür \(\forall c \in \mathbb N: \exists w \in A^*: |f_2(w)| > c\cdot(|w| + 1)\) \\
-Hierfür wähle \(w := v_0v_1v_3 \dots v_n\) mit \(n := \max(2c, 2)\) und \(v_i \ne \epsilon\) für \(i \in [n]\), dann gilt: 
+Hierfür wähle \(w := v_0v_1v_3 \dots v_n\) mit \(n := \max(2c, 3)\) und \(v_i \ne \epsilon\) für \(i \in [n]\), dann gilt: 
 \(|f_2(w)| = \frac{n^2 + n}{2} = \frac{4c^2 + 2c}{2} = 2c^2+c > 2c^2 + 2\) aufgrund der gaußschen Summenformel und der Definition von \(f_2\).
 \\Dann gilt: \(|f_2(w)| > c\cdot(|w| + 1)\), was zu zeigen war. \qed
 \subsection*{A2}
-
+\pagebreak
 \subsection*{A3}
 Da \(f\) und \(\lambda : B^* \rightarrow B^*, w \mapsto wv\) sequenziell\footnote[1]{\(\lambda\) ist tatsächlich sequenziell, betrachte dafür die jeweiligen Identitätsfunktionen als Zustands und Ausgabefunktionen und \(\phi : Q \rightarrow B^*, q \mapsto v\) als die finale Ausgabefunktion, für \(Q := \{z_0\}\).} sind, gilt nach Bonusaufgabe 7, dass \(\tilde{f}\) sequenziell ist, da \(\tilde{f} = \lambda \circ f\) gilt. \qed
 \subsection*{A4}
-
+\subsubsection*{a)}
+Induktionsbasis: Sei \(u,v \in A^*, |u| = |v| = 1\). Dann gilt:
+\begin{flalign*}
+    & \hat\delta(q, uv) & \\
+    = & \delta(\hat\delta(q, u), v) & \text{| Def. \(\hat\delta\)} \\
+    = & \delta(\delta(\hat\delta(q, \epsilon), u), v) &  \\
+    = & \delta(\delta(q, u), v) & \text{| \(2 \cdot\) Def. \(\hat\delta\)} \\
+    = & \delta(\delta(\hat\delta(\hat\delta(q, \epsilon), \epsilon), u), v) &  \\
+    = & \delta(\hat\delta(\hat\delta(q, \epsilon), u), v) & \text{| Def. \(\hat\delta\)}  \\
+    = & \delta(\hat\delta(\hat\delta(\hat\delta(q,\epsilon), u), \epsilon), v) & \\
+    = & \hat\delta(\hat\delta(\hat\delta(q, \epsilon), u), v) & \\
+    = & \hat\delta(\hat\delta(q, u), v)
+\end{flalign*}
+Hier sieht man auch, dass die Basis gilt, wenn eines der Wörter das leere Wort ist, da wir das im Beweis selber gezeigt hatten zwischen Schritt 3 und 6. \\
+Induktionsschritt: Sei \(w \in A^*, a \in A\). Dann gilt:
+\begin{flalign*}
+    & \hat\delta(q, wa) & \\
+    = & \delta(\hat\delta(q, w), a) & \text{| Def. \(\hat\delta\)}  \\
+    = & \delta(\hat\delta(\hat\delta(q, w), \epsilon), a) & \\
+    = & \hat\delta(\hat\delta(q, w), a)
+\end{flalign*}
+Damit wurde die Aussage induktiv gezeigt. \qed
+\subsubsection*{b)}
 \subsection*{A7}
 maybe baby
 
