@@ -105,7 +105,25 @@ Induktionsschritt: Sei \(w \in A^*, a \in A\). Dann gilt:
 \end{flalign*}
 Damit wurde die Aussage induktiv gezeigt. \qed
 \subsubsection*{b)}
+Induktionsbasis: Sei \(q \in Q\), dann gilt: 
+\begin{flalign*}
+    & \hat\alpha(q, \epsilon) & \\
+    = & \hat\alpha(\hat\delta(q, \epsilon), \epsilon)  & \\
+    = & \epsilon \cdot \hat\alpha(\hat\delta(q, \epsilon), \epsilon) & \\
+    = & \hat\alpha(q, \epsilon) \cdot \hat\alpha(\hat\delta(q, \epsilon), \epsilon) 
+\end{flalign*} 
+\pagebreak \\ Induktionsschritt: Sei \(q \in Q\), \(w \in A^*\), \(a \in A\), dann gilt:
+ \begin{flalign*}
+    & \hat\alpha(q, wa) & \\
+    = & \hat\alpha(q, w) \cdot \alpha(\hat\delta(q, w), a) & \text{| \(q' := \hat\delta(q, w)\)} \\
+    = & \hat\alpha(q, w) \cdot \alpha(q', a) & \\
+    = & \hat\alpha(q, w) \cdot \epsilon \cdot \alpha(q', a) & \text{| Def. \(\hat\delta, \hat\alpha\)} \\
+    = & \hat\alpha(q, w) \cdot \hat\alpha(q', \epsilon) \cdot \alpha(\hat\delta(q', \epsilon), a) & \text{| Def. \(\hat\alpha\)} \\
+    = & \hat\alpha(q, w) \cdot \hat\alpha(q', a) & \text{| Def. \(q'\)} \\
+    = & \hat\alpha(q, w) \cdot \hat\alpha(\hat\delta(q, w), a)
+ \end{flalign*}
+Damit wurde die Aussage induktiv gezeigt. \qed
 \subsection*{A7}
-maybe baby
+maybe
 
 \end{document}
