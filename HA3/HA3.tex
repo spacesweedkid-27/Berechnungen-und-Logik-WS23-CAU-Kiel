@@ -105,25 +105,29 @@ Induktionsschritt: Sei \(w \in A^*, a \in A\). Dann gilt:
 \end{flalign*}
 Damit wurde die Aussage induktiv gezeigt. \qed
 \subsubsection*{b)}
-Induktionsbasis: Sei \(q \in Q\), dann gilt: 
-\begin{flalign*}
-    & \hat\alpha(q, \epsilon) & \\
-    = & \hat\alpha(\hat\delta(q, \epsilon), \epsilon)  & \\
-    = & \epsilon \cdot \hat\alpha(\hat\delta(q, \epsilon), \epsilon) & \\
-    = & \hat\alpha(q, \epsilon) \cdot \hat\alpha(\hat\delta(q, \epsilon), \epsilon) 
-\end{flalign*} 
-\pagebreak \\ Induktionsschritt: Sei \(q \in Q\), \(w \in A^*\), \(a \in A\), dann gilt:
- \begin{flalign*}
-    & \hat\alpha(q, wa) & \\
-    = & \hat\alpha(q, w) \cdot \alpha(\hat\delta(q, w), a) & \text{| \(q' := \hat\delta(q, w)\)} \\
-    = & \hat\alpha(q, w) \cdot \alpha(q', a) & \\
-    = & \hat\alpha(q, w) \cdot \epsilon \cdot \alpha(q', a) & \text{| Def. \(\hat\delta, \hat\alpha\)} \\
-    = & \hat\alpha(q, w) \cdot \hat\alpha(q', \epsilon) \cdot \alpha(\hat\delta(q', \epsilon), a) & \text{| Def. \(\hat\alpha\)} \\
-    = & \hat\alpha(q, w) \cdot \hat\alpha(q', a) & \text{| Def. \(q'\)} \\
-    = & \hat\alpha(q, w) \cdot \hat\alpha(\hat\delta(q, w), a)
- \end{flalign*}
-Damit wurde die Aussage induktiv gezeigt. \qed
+\pagebreak
 \subsection*{A7}
-maybe
+\textbf{Voraussetzung:} \(A,B,C\) sind Mengen und \(f: B \rightharpoonup C\) und \(g: A \rightharpoonup B\) partielle Funktionen. \(f \circ g\) 
+ist eine Komposition, gegeben durch:\\
+\begin{equation*}
+    f \circ g : A \rightharpoonup C, x \mapsto (f \circ g)(x) :=
+    \begin{cases}
+    f(g(x)), & \text{falls } g(x) \text{und } f(g(x)) \text{ definiert,} \\
+    \text{undefiniert}, & \text{sonst}
+    \end{cases}
+\end{equation*}
+\textbf{Behauptung:} Sind \(f\) und \(g\) sequentielle Funktionen, so ist auch ihre Komposition eine sequentielle Funktion.\\
+\textbf{Beweis:} \\
+Wir zeigen, dass die Komposition \(f \circ g\) linear beschränktes Abstandswachstum besitzt. Zu zeigen ist also:
+\(\exists c \in \mathbb{N}\) mit \(d(f \circ g(x), f \circ g(y)) \leq c \cdot d(x,y)\).\\
+Wenn \(f\) und \(g\) sequentielle Funktionen sind, dann gilt:\\
+(1) \(d(g(x_1),g(y_1)) \leq c_1 \cdot d(x_1, y_1)\) für alle \(x_1,y_1 \in A\) und\\
+(2) \(d(f(x_2),f(y_2)) \leq c_2 \cdot d(x_2, y_2)\) für alle \(x_2,y_2 \in B\).\\
+Durch die Definition der Komposition wissen wir, dass \((f \circ g)(x) = f(g(x))\) gilt, falls \(g(x)\) und \(f(g(x))\) definiert sind.\\
+Bekannt durch die Voraussetzung ist, wenn ein \(x \in dom(g)\) eine valide Eingabe ist, dann bildet \(g\) auf \(B\) ab, wobei nach 
+Voraussetzung \(B = dom(f)\) gilt. Für jede Eingabe \(x \in dom(g)\) ist also auch \(f(g(x))\) definiert.\\
+Wähle nun ein \(c \in \mathbb{N}\) so, dass \(c := max(c_1, c_2)\) so gilt, dass:\\
+\(d(f(g(x)), f(g(y))) \leq c \cdot d(x,y)\) für alle \(x,y \in dom(g)\).\\
+Damit ist gezeigt, was zu zeigen war. \qed
 
 \end{document}
