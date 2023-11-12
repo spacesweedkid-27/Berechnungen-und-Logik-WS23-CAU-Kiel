@@ -39,7 +39,45 @@ Wir zeigen dafür \(\forall c \in \mathbb N: \exists w \in A^*: |f_2(w)| > c\cdo
 Hierfür wähle \(w := v_0v_1v_3 \dots v_n\) mit \(n := \max(2c, 3)\) und \(v_i \ne \epsilon\) für \(i \in [n]\), dann gilt: 
 \(|f_2(w)| = \frac{n^2 + n}{2} = \frac{4c^2 + 2c}{2} = 2c^2+c > 2c^2 + 2\) aufgrund der gaußschen Summenformel und der Definition von \(f_2\).
 \\Dann gilt: \(|f_2(w)| > c\cdot(|w| + 1)\), was zu zeigen war. \qed
+\pagebreak
 \subsection*{A2}
+Zunächst zeigen wir \(f_M = f\) für \(x = 1^m\) per Induktion über \(m\).\\
+Induktionsanfang: Für \(m = 0\) gilt: \(\hat{\alpha} (+1, 1^0) = \hat{\alpha}(+1, \epsilon = \epsilon)\) und für \(m = 1\) gilt:
+\begin{flalign*}
+    \hat{\alpha} (+1, 1^1) &= \hat{\alpha}(+1, \epsilon) \alpha (\hat{\delta}(+1, \epsilon), 1) & \text{Eigenschaft \(\hat{\alpha}\)}\\
+    &= \epsilon \alpha(+1, 1) &\\
+    &=\epsilon 0 = 0
+\end{flalign*}
+Induktionsschritt: Für \(m > 1\) gilt mit \(m = m_0 + (m-1), m_0 =1\):
+\begin{flalign*}
+    \hat{\alpha}(+1, 1^{m_0+(m-1)}) &= \hat{\alpha}(+1, 1^{m_0})\alpha(\hat{\delta}(+1, 1^{m_0}), 1^{m-1}) & \text{Eigenschaft \(\hat{\alpha}\)}\\
+    &= \hat{\alpha}(+1, 1^{m_0}) \alpha(+1, 1^{m-1}) & \text{\(\hat{\delta}\) bekannt}\\
+    &= \hat{\alpha}(+1, 1^1)\alpha (+1, 1^{m-1}) & \text{\(\hat{\alpha}(+1,1)\) bekannt}\\
+    &= 0 \alpha(+1,1^{m-1}) \\
+    &= 0^m
+\end{flalign*}
+Nun zeigen wir \(f_M = f\) für den Fall \(x = 1^m 0y\), hier per Induktion über \(y\).\\
+Induktionsanfang: Für \(\vert y \vert = 0\), also \(y = \epsilon\) gilt:
+\begin{flalign*}
+    \hat{\alpha}(+1, 1^m0) &= \hat{\alpha}(+1, 1^m)\alpha(\hat{\delta}(+1, 1^m), 0) & \text{Eigenschaft \(\hat{\alpha}\)}\\
+    &= 0^m \alpha(\hat{\delta}(+1, 1^m), 0) & \text{\(\hat{\alpha}(+1,1^m)\) bekannt}\\
+    &= 0^m \alpha(+1,0) & \text{\(\hat{\delta}\) bekannt}\\
+    &= 0^m 1\\
+    &= 0^m1y = f(x) & y = \epsilon
+\end{flalign*}
+Induktionsschritt: Für \(\vert y \vert > 0\) gilt:
+\begin{flalign*}
+    \hat{\alpha}(+1, 1^m0y) &= \hat{\alpha}(+1, 1^m0) \alpha(\hat{\delta}(+1,1^m0), y) &\\
+    &= \hat{\alpha}(+1, 1^m0)\alpha(\delta(\hat{\delta}(+1, 1^m),0),y)&\\
+    &= \hat{\alpha}(+1, 1^m0)\alpha(\delta(+1, 0), y) & \text{\(\hat{\delta}\) bekannt}\\
+    &= \hat{\alpha}(+1, 1^m0)\alpha(=, y) &\\
+    &= \hat{\alpha}(+1, 1^m)\alpha(\hat{\delta}(+1, 1^m), 0) \alpha(=,y) & \text{Eigenschaft } \hat{\alpha}\\
+    &= \hat{\alpha}(+1, 1^m)\alpha(+1,0) \alpha(=,y) & \hat{\delta} \text{ bekannt}\\
+    &= \hat{\alpha}(+1, 1^m)1 \alpha(=,y) & \alpha(+1,0) \text{ bekannt}\\
+    &= \hat{\alpha}(+1, 1^m)1y & \alpha(=,y) = y\\
+    &=0^m1y &\hat{\alpha}(+1, 1^m) \text{ bekannt}
+\end{flalign*}
+Damit ist gezeigt, was zu zeigen war. \qed
 \pagebreak
 \subsection*{A3}
 Da \(f\) und \(\lambda : B^* \rightarrow B^*, w \mapsto wv\) sequenziell\footnote[1]{\(\lambda\) ist tatsächlich sequenziell, betrachte dafür die jeweiligen Identitätsfunktionen als Zustands und Ausgabefunktionen und \(\phi : Q \rightarrow B^*, q \mapsto v\) als die finale Ausgabefunktion, für \(Q := \{z_0\}\).} sind, gilt nach Bonusaufgabe 7, dass \(\tilde{f}\) sequenziell ist, da \(\tilde{f} = \lambda \circ f\) gilt. \qed
