@@ -7,6 +7,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{titling}
+\usepackage{tikz}
+\usetikzlibrary{arrows, automata, positioning}
 
 
 \newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
@@ -67,5 +69,35 @@ Somit berechnen wir \(d(f(x), f(y))\) wie folgt:
     = & 2 + |0^c| + |1 \cdot 0^{c-1}| & \text{| Def. \(|\cdot|\)} \\
     = & 2 + 2c
 \end{flalign*}
-Dann gilt somit: \(c \cdot d(x,y) = 2c < 2c + 2 = d(f(x), f(y))\) \gedanke was zu zeigen war. \qed
+Dann gilt somit: \(c \cdot d(x,y) = 2c < 2c + 2 = d(f(x), f(y))\) \gedanke was zu zeigen war. \qed \pagebreak
+\subsection*{A2}
+\subsubsection*{a)}
+\(\mathcal{A}\) akzeptiert Wörter, die eine ungerade Anzahl an \(0\) haben. \\
+\(\mathcal{B}\) akzeptiert Wörter, die eine ungerade Anzahl an \(1\) haben. \\
+\(\mathcal{C}\) akzeptiert Wörter, die eine ungerade Anzahl an \(0\) haben und eine gerade Anzahl an \(1\) haben.\\
+Letzteres ergibt sich, da \(\mathcal{C}\) aus den Transitionsfunktionen von \(\mathcal{A}\) und \(\mathcal{B}\) besteht, nur, dass diese auf die Zustände von \(\mathcal{C}\) abbilden, welche, wie ihre Namen anspielen, aus \(\{1^\mathcal A, 2^\mathcal A\} \times \{1^\mathcal B, 2^\mathcal B\}\) sind. \\
+Jegliche originellen Transitionsfunktionen haben zwei isomorphe Komplemente in \(\mathcal{C}\).
+\subsubsection*{b)}
+Der komposierte Automat \(\mathcal{C}\) wird durch folgendes Bild dargestellt:
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=2.8cm, semithick]
+        \node[initial, state]   (0) {\(1^\mathcal{A}, 1^\mathcal{B}\)};
+        \node[state] (1) [right = 2cm] {\(2^\mathcal{A}, 1^\mathcal{B}\)};
+        \node[state] (2) [below = 2cm] {\(1^\mathcal{A}, 2^\mathcal{B}\)};
+        \node[state, accepting] (3) [below right = 3.2cm] {\(2^\mathcal{A}, 2^\mathcal{B}\)};
+
+        \path (0) edge [above, bend left=10] node {0} (1)
+              (1) edge [below, bend left=10] node {0} (0)
+              (0) edge [right, bend left=10] node {1} (2)
+              (2) edge [left, bend left=10] node {1} (0)
+              (2) edge [above, bend left=10] node {0} (3)
+              (3) edge [below, bend left=10] node {0} (2)
+              (1) edge [right, bend left=10] node {1} (3)
+              (3) edge [left, bend left=10] node {1} (1);
+    \end{tikzpicture}    
+\end{center}
+Der Gedanke ist der gleiche, wie in a), nur, dass wir den Endzustand verschieben auf den Zustand, der nur erreicht werden kann, wenn die Anzahl an Nullen und Einsen ungerade ist.
+\subsubsection*{c)}
+Da \(\mathcal{A}\) deterministisch ist, können wir einfach \(Q^\mathcal{A} \setminus F^\mathcal{A}\) als Menge der Endzustände verwenden, um \(\overline{\text{L}(\mathcal A)}\) zu erhalten, da ein Wort akzeptiert wird nach Definition, wenn der Automat in einem Endzustand endet. Jedes Wort, das keinen Endzustand im Automaten hervorruft, wird somit nicht akzeptiert. \\
+Um genau diese Wörter zu finden, muss man nur die derzeitigen Endzustände falszifizieren und die ehemaligen nicht Endzustände als neue Endzustände setzen \gedanke genau dann erreichen wir \(\overline{\text{L}(\mathcal A)}\).
 \end{document}
