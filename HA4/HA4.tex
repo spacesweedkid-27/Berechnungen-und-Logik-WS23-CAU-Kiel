@@ -9,7 +9,8 @@
 \usepackage{titling}
 \usepackage{tikz}
 \usetikzlibrary{arrows, automata, positioning}
-
+\usepackage{tikz-among-us}
+\usepackage[cor=red,BG,type=1]{tikz-among-us-watermark-eso-pic}
 
 \newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
 \newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
@@ -30,13 +31,16 @@
 \setlength{\droptitle}{-11em}
 \setlength{\jot}{12pt}
 
-\title{Berechnungen und Logik\\Hausaufgabenserie 4}
+\title{Berechnungen und Logik\\Hausaufgabenserie \begin{tikzpicture}
+    \amongUsIII[scale=0.1]{red}{blue}
+\end{tikzpicture}}
 \author{Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
 \date{}
 
 
 \begin{document}
 \maketitle
+
 
 \doublespacing
 \subsection*{A1}
@@ -99,5 +103,5 @@ Der komposierte Automat \(\mathcal{C}\) wird durch folgendes Bild dargestellt:
 Der Gedanke ist der gleiche, wie in a), nur, dass wir den Endzustand verschieben auf den Zustand, der nur erreicht werden kann, wenn die Anzahl an Nullen und Einsen ungerade ist.
 \subsubsection*{c)}
 Da \(\mathcal{A}\) deterministisch ist, können wir einfach \(Q^\mathcal{A} \setminus F^\mathcal{A}\) als Menge der Endzustände verwenden, um \(\overline{\text{L}(\mathcal A)}\) zu erhalten, da ein Wort akzeptiert wird nach Definition, wenn der Automat in einem Endzustand endet. Jedes Wort, das keinen Endzustand im Automaten hervorruft, wird somit nicht akzeptiert. \\
-Um genau diese Wörter zu finden, muss man nur die derzeitigen Endzustände falszifizieren und die ehemaligen nicht Endzustände als neue Endzustände setzen \gedanke genau dann erreichen wir \(\overline{\text{L}(\mathcal A)}\).
+Um genau diese Wörter zu finden, muss man nur die derzeitigen Endzustände falsifizieren und die ehemaligen nicht Endzustände als neue Endzustände setzen \gedanke genau dann erreichen wir \(\overline{\text{L}(\mathcal A)}\). \\
 \end{document}
