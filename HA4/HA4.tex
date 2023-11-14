@@ -153,8 +153,27 @@ Um genau diese Wörter zu finden, muss man nur die derzeitigen Endzustände fals
 \subsubsection*{b)}
 Da wir die kombinierten Wörter aus \(L(A_1)\) und \(L(A_2)\) suchen, müssen wir alle Endzustände von \(A_1\) eliminieren aber als \textquote{Startzustände}  für \(A_2\) markieren. Damit ist gemeint, dass alle Transitionsfunktionen und Zustände von \(A_2\) ein isomorphes Komplement in \(C\) haben müssen wobei die Endzustände von \(A_1\) auch alle Eigenschaften von den Startzuständen von \(A_2\) besitzen müssen. \\
 Wir übertragen also alle Zustände und die Transitionsfunktion von \(A_2\) so, dass die ehemaligen Endzustände von \(A_1\) in die ehemaligen Startzustände von \(A_2\) übergehen und nach der Transition sich genau so verhalten. \\
-Bei vielen Endzuständen von \(A_1\) und Startzuständen von \(A_2\) kann die Darstellung unübersichtlich werden, deswegen empfiehlt sich eine andere Notation, bei der man die Startpfeile von den Startzuständen von \(A_2\) unbeschriftet von den Endzuständen von \(A_1\) schreiben kann verwendet, sodass die Darstellung ähnlicher zu den originellen Automaten aussieht.
+Bei vielen Endzuständen von \(A_1\) und Startzuständen von \(A_2\) kann die Darstellung unübersichtlich werden, deswegen empfiehlt sich eine andere Notation, bei der man die Startpfeile von den Startzuständen von \(A_2\) unbeschriftet von den Endzuständen von \(A_1\) schreiben kann verwendet, sodass die Darstellung ähnlicher zu den originellen Automaten aussieht. \pagebreak
 \subsection*{A4}
+\subsubsection*{a)}
+Wir definieren \(\mathcal A := (Q, A, \delta, q_0, F)\) mit \(Q := \{\epsilon, \overline{a}, \overline{b}, \overline{c}\}\), \(q_0 := \epsilon\), \(F := Q\) und der Transitionsfunktion \(\delta\) dargestellt in folgender Illustration:
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=2.8cm, semithick]
+        \node[initial, state, accepting] (e) {\(\epsilon\)};
+        \node[state, accepting, above left of = e] (a) {\(\overline{a}\)};
+        \node[state, accepting, above of = e] (b) {\(\overline{b}\)};
+        \node[state, accepting, above right of = e] (c) {\(\overline{c}\)};
+
+        \path (e) edge [left] node {\(b/c\)} (a)
+              (e) edge [right] node {\(a/c\)} (b)
+              (e) edge [right] node {\(a/b\)} (c)
+              (a) edge [loop, above] node {\(b/c\)} (a)
+              (b) edge [loop, above] node {\(a/c\)} (b)
+              (c) edge [loop, above] node {\(a/b\)} (c);
+    \end{tikzpicture}
+\end{center}
+Dann gilt \(L = L(A)\), da wir Zustände und Übergänge, die die Sprache brechen würde, nicht zulassen. Damit bleiben falsche Eingaben undefiniert, wodurch ein solches Wort nicht akzeptiert werden kann.
+\subsubsection*{b)}
 
 \end{doublespace}
 \end{document}
