@@ -11,6 +11,7 @@
 \usetikzlibrary{arrows, automata, positioning}
 \usepackage{tikz-among-us}
 \usepackage[cor=red,BG,type=1]{tikz-among-us-watermark-eso-pic}
+\usepackage{csquotes} % for \textquote{}
 
 \newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
 \newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
@@ -42,7 +43,8 @@
 \maketitle
 
 
-\doublespacing
+\begin{doublespace}
+    
 \subsection*{A1}
 \vor \(A = {0, 1}\), \(\overline{\cdot}: A^* \rightarrow A^*, ab\mapsto \begin{cases}
     0, & ab = 1 \\
@@ -102,6 +104,57 @@ Der komposierte Automat \(\mathcal{C}\) wird durch folgendes Bild dargestellt:
 \end{center}
 Der Gedanke ist der gleiche, wie in a), nur, dass wir den Endzustand verschieben auf den Zustand, der nur erreicht werden kann, wenn die Anzahl an Nullen und Einsen ungerade ist.
 \subsubsection*{c)}
-Da \(\mathcal{A}\) deterministisch ist, können wir einfach \(Q^\mathcal{A} \setminus F^\mathcal{A}\) als Menge der Endzustände verwenden, um \(\overline{\text{L}(\mathcal A)}\) zu erhalten, da ein Wort akzeptiert wird nach Definition, wenn der Automat in einem Endzustand endet. Jedes Wort, das keinen Endzustand im Automaten hervorruft, wird somit nicht akzeptiert. \\
-Um genau diese Wörter zu finden, muss man nur die derzeitigen Endzustände falsifizieren und die ehemaligen nicht Endzustände als neue Endzustände setzen \gedanke genau dann erreichen wir \(\overline{\text{L}(\mathcal A)}\). \\
+Da \(\mathcal{A}\) DEA ist, können wir einfach \(Q^\mathcal{A} \setminus F^\mathcal{A}\) als Menge der Endzustände verwenden, um \(\overline{\text{L}(\mathcal A)}\) zu erhalten, da ein Wort akzeptiert wird nach Definition, wenn der Automat in einem Endzustand endet. Jedes Wort, das keinen Endzustand im Automaten hervorruft, wird somit nicht akzeptiert. \\
+Um genau diese Wörter zu finden, muss man nur die derzeitigen Endzustände falsifizieren und die ehemaligen nicht Endzustände als neue Endzustände setzen \gedanke genau dann erreichen wir \(\overline{\text{L}(\mathcal A)}\).
+\subsection*{A3}
+\subsubsection*{a)}
+\end{doublespace}
+\vspace*{-1cm}
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=2.8cm, semithick]
+        \node[initial, state]   (0) {\(q_0\)};
+        \node[state] (1) [right of = 0] {\(q_1\)};
+        \node[state] (2) [right of = 1] {\(q_2\)};
+
+        \node[state] (11) [below = 1.5cm] {1};
+        \node[state] (12) [below = 3cm] {2};
+        \node[state] (14) [right of = 11] {4};
+        \node[state] (15) [right of = 12] {5};
+        \node[state, accepting] (16) [below right = 1cm and 0.6cm of 12] {6};
+
+        \path (0) edge [above, bend left=10] node {\(a\)} (1)
+              (0) edge [above, loop above] node {\(b,c\)} (0)
+              (1) edge [below, bend left=10] node {\(b,c\)} (0)
+              (1) edge [above] node {\(a\)} (2)
+              (2) edge [above, loop above] node {\(a,b,c\)} (2)
+              (0) edge [left] node {\(a\)} (11)
+              (1) edge [right] node {\(b\)} (14)
+
+              (0) edge [left, bend right=30] node {\(b\)} (14)
+              (1) edge [right, bend left=30] node {\(a\)} (11)
+              (11) edge [left] node {\(b\)} (12)
+              (12) edge [left] node {\(a\)} (16)
+              (14) edge [right] node {\(a\)} (15)
+              (15) edge [right] node {\(b\)} (16)
+              (16) edge [loop below] node {\(a, b\)} (16)
+              ;
+    \end{tikzpicture} \\
+    \SetSinglespace{1}
+    \vspace*{0.5cm}
+    \begin{singlespace*}
+        \small{
+        Da wir nur mit 6 enden wollen, sind \(q_0\) und \(q_1\) keine Endzustände mehr, jedoch erfüllen sie beide ihre ehemaligen Aufgaben, sowohl als auch existiert ein Teilisomorphismus zu den Zuständen und ihren Transitionsfunktionen über 0, 3.
+    }    
+    \end{singlespace*}
+    
+\end{center}
+\begin{doublespace}
+
+\subsubsection*{b)}
+Da wir die kombinierten Wörter aus \(L(A_1)\) und \(L(A_2)\) suchen, müssen wir alle Endzustände von \(A_1\) eliminieren aber als \textquote{Startzustände}  für \(A_2\) markieren. Damit ist gemeint, dass alle Transitionsfunktionen und Zustände von \(A_2\) ein isomorphes Komplement in \(C\) haben müssen wobei die Endzustände von \(A_1\) auch alle Eigenschaften von den Startzuständen von \(A_2\) besitzen müssen. \\
+Wir übertragen also alle Zustände und die Transitionsfunktion von \(A_2\) so, dass die ehemaligen Endzustände von \(A_1\) in die ehemaligen Startzustände von \(A_2\) übergehen und nach der Transition sich genau so verhalten. \\
+Bei vielen Endzuständen von \(A_1\) und Startzuständen von \(A_2\) kann die Darstellung unübersichtlich werden, deswegen empfiehlt sich eine andere Notation, bei der man die Startpfeile von den Startzuständen von \(A_2\) unbeschriftet von den Endzuständen von \(A_1\) schreiben kann verwendet, sodass die Darstellung ähnlicher zu den originellen Automaten aussieht.
+\subsection*{A4}
+
+\end{doublespace}
 \end{document}
