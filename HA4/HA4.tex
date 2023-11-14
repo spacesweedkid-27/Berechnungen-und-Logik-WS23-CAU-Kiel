@@ -9,8 +9,8 @@
 \usepackage{titling}
 \usepackage{tikz}
 \usetikzlibrary{arrows, automata, positioning}
-\usepackage{tikz-among-us}
-\usepackage[cor=red,BG,type=1]{tikz-among-us-watermark-eso-pic}
+%\usepackage{tikz-among-us}
+%\usepackage[cor=red,BG,type=1]{tikz-among-us-watermark-eso-pic}
 \usepackage{csquotes} % for \textquote{}
 
 \newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
@@ -24,6 +24,9 @@
 % Hab länger gebraucht um zu realisieren, dass das ne gute Idee wäre
 \newcommand*{\R}{\mathbb R}
 \newcommand*{\N}{\mathbb N}
+\newcommand*{\sussyImposter}{\begin{tikzpicture}
+    \amongUsIII[scale=0.1]{red}{blue}
+\end{tikzpicture}}
 
 
 \pagestyle{plain}
@@ -32,9 +35,7 @@
 \setlength{\droptitle}{-11em}
 \setlength{\jot}{12pt}
 
-\title{Berechnungen und Logik\\Hausaufgabenserie \begin{tikzpicture}
-    \amongUsIII[scale=0.1]{red}{blue}
-\end{tikzpicture}}
+\title{Berechnungen und Logik\\Hausaufgabenserie 4}
 \author{Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
 \date{}
 
