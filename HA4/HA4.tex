@@ -42,8 +42,6 @@
 \begin{document}
 \maketitle
 
-
-\begin{doublespace}
     
 \subsection*{A1}
 \vor \(A = {0, 1}\), \(\overline{\cdot}: A^* \rightarrow A^*, ab\mapsto \begin{cases}
@@ -108,7 +106,6 @@ Da \(\mathcal{A}\) DEA ist, können wir einfach \(Q^\mathcal{A} \setminus F^\mat
 Um genau diese Wörter zu finden, muss man nur die derzeitigen Endzustände falsifizieren und die ehemaligen nicht Endzustände als neue Endzustände setzen \gedanke genau dann erreichen wir \(\overline{\text{L}(\mathcal A)}\).
 \subsection*{A3}
 \subsubsection*{a)}
-\end{doublespace}
 \vspace*{-1cm}
 \begin{center}
     \begin{tikzpicture}[->, >=stealth', node distance=2.8cm, semithick]
@@ -123,10 +120,10 @@ Um genau diese Wörter zu finden, muss man nur die derzeitigen Endzustände fals
         \node[state, accepting] (16) [below right = 1cm and 0.6cm of 12] {6};
 
         \path (0) edge [above, bend left=10] node {\(a\)} (1)
-              (0) edge [above, loop above] node {\(b,c\)} (0)
-              (1) edge [below, bend left=10] node {\(b,c\)} (0)
+              (0) edge [above, loop above] node {\(b \vee c\)} (0)
+              (1) edge [below, bend left=10] node {\(b\vee c\)} (0)
               (1) edge [above] node {\(a\)} (2)
-              (2) edge [above, loop above] node {\(a,b,c\)} (2)
+              (2) edge [above, loop above] node {\(a\vee b\vee c\)} (2)
               (0) edge [left] node {\(a\)} (11)
               (1) edge [right] node {\(b\)} (14)
 
@@ -136,19 +133,15 @@ Um genau diese Wörter zu finden, muss man nur die derzeitigen Endzustände fals
               (12) edge [left] node {\(a\)} (16)
               (14) edge [right] node {\(a\)} (15)
               (15) edge [right] node {\(b\)} (16)
-              (16) edge [loop below] node {\(a, b\)} (16)
+              (16) edge [loop below] node {\(a\vee b\)} (16)
               ;
     \end{tikzpicture} \\
-    \SetSinglespace{1}
     \vspace*{0.5cm}
-    \begin{singlespace*}
         \small{
         Da wir nur mit 6 enden wollen, sind \(q_0\) und \(q_1\) keine Endzustände mehr, jedoch erfüllen sie beide ihre ehemaligen Aufgaben, sowohl als auch existiert ein Teilisomorphismus zu den Zuständen und ihren Transitionsfunktionen über 0, 3.
-    }    
-    \end{singlespace*}
-    
+        }    
+
 \end{center}
-\begin{doublespace}
 
 \subsubsection*{b)}
 Da wir die kombinierten Wörter aus \(L(A_1)\) und \(L(A_2)\) suchen, müssen wir alle Endzustände von \(A_1\) eliminieren aber als \textquote{Startzustände}  für \(A_2\) markieren. Damit ist gemeint, dass alle Transitionsfunktionen und Zustände von \(A_2\) ein isomorphes Komplement in \(C\) haben müssen wobei die Endzustände von \(A_1\) auch alle Eigenschaften von den Startzuständen von \(A_2\) besitzen müssen. \\
@@ -164,16 +157,60 @@ Wir definieren \(\mathcal A := (Q, A, \delta, q_0, F)\) mit \(Q := \{\epsilon, \
         \node[state, accepting, above of = e] (b) {\(\overline{b}\)};
         \node[state, accepting, above right of = e] (c) {\(\overline{c}\)};
 
-        \path (e) edge [left] node {\(b/c\)} (a)
-              (e) edge [right] node {\(a/c\)} (b)
-              (e) edge [right] node {\(a/b\)} (c)
-              (a) edge [loop, above] node {\(b/c\)} (a)
-              (b) edge [loop, above] node {\(a/c\)} (b)
-              (c) edge [loop, above] node {\(a/b\)} (c);
+        \path (e) edge [left] node {\(b\vee c\)} (a)
+              (e) edge [right] node {\(a\vee c\)} (b)
+              (e) edge [right] node {\(a\vee b\)} (c)
+              (a) edge [loop, above] node {\(b\vee c\)} (a)
+              (b) edge [loop, above] node {\(a\vee c\)} (b)
+              (c) edge [loop, above] node {\(a\vee b\)} (c);
     \end{tikzpicture}
 \end{center}
-Dann gilt \(L = L(A)\), da wir Zustände und Übergänge, die die Sprache brechen würde, nicht zulassen. Damit bleiben falsche Eingaben undefiniert, wodurch ein solches Wort nicht akzeptiert werden kann.
+Dann gilt \(L = L(A)\), da wir Zustände und Übergänge, die die Sprache brechen würde, nicht zulassen. Damit bleiben falsche Eingaben undefiniert, wodurch ein solches Wort nicht akzeptiert werden kann. 
 \subsubsection*{b)}
+Wir nennen \(\mathcal A\) einen DEA, der die gleiche Sprache wie \(A\) (der Automat) erkennt. Es gilt für diesen DEA:
+\[\mathcal A := \{Q', A, \delta_{\mathcal A}, \{\epsilon\}, Q' \setminus \{\emptyset, \{\overline{a}, \overline{b}, \overline{c}\}\}\] wobei \(Q' = \mathcal{P}(Q)\) gilt. \pagebreak \\
+Um die Potenzmengenkonstruktion von \(A\) (dem Automaten) zu erreichen, fangen wir mit dem Startzustand \(\{\epsilon\}\) an. \\
+Dann akzeptieren wir \(a, b, c\), was jeweils zu den Folgezuständen \(\{\overline{c}, \overline{b}\}, \{\overline{c}, \overline{a}\}, \{\overline{a}, \overline{b}\}\) führt. Für diese Zustände akzeptieren wir jeweils \(c\vee b, c \vee a, a \vee b\), was zu den jeweiligen Zuständen \(\{\overline{b}\} \vee \{\overline{c}\}, \{\overline{a}\} \vee \{\overline{c}\}, \{\overline{b}\} \vee \{\overline{a}\}\) führt. Die anderen Eingaben, also jeweils \(a, b,c\), führen alle zu dem jeweiligen Zustand selbst, da dies nicht unsere Regeln verletzt oder irgendwas für uns interessantes an dem Wort verändert. \\
+Nun betrachten wir die Zustände \(\{\overline{c}\}, \{\overline{a}\}, \{\overline{b}\}\). Für diese müssen die Eingaben \(c, a\) und \(b\) auf \(\emptyset\) abbilden, da nun das Wort unser Kriterium verletzt, die pro Zustand zwei anderen Eingaben bilden, wie im NEA auf sich selbst ab. Den Zustand \(\{\overline{a}, \overline{b}, \overline{c}\}\) und die Zustände \(\{m \in \mathcal P(Q) | \epsilon \in m \wedge |m| > 1\}\) ignorieren wir, da es keine Möglichkeit gibt, sie zu erreichen. \(\emptyset\) bildet alle Eingaben auf sich selbst, da wir alle Wörter ignorieren, die diesen Zustand erreichen. Hieraus folgt, dass wir alle Zustände außer \(\emptyset\) und \(\{\overline{a}, \overline{b}, \overline{c}\}\) als Endzustände zulassen. \\
+Es ergibt sich folgende Darstellung (wir ignorieren außer bei \(\emptyset\) die äußeren Klammern): \vspace*{-0.5cm}
+\begin{center}
+    \begin{tikzpicture}
+        [->, >=stealth', node distance=2.8cm, semithick, every node/.append style={transform shape}, scale=0.9]
+        \node[initial, state, accepting] (e) {\(\epsilon\)};
+        \node[state, accepting, above left of = e] (cb) {\(\overline{c},\overline{b}\)};
+        \node[state, accepting, above of = e] (ca) {\(\overline{c},\overline{a}\)};
+        \node[state, accepting, above right of = e] (ab) {\(\overline{a},\overline{b}\)};
+        \node[state, accepting, left = 1.5cm, above right of = cb] (c) {\(\overline{c}\)};
+        \node[state, accepting, above = 5.2cm] (b) {\(\overline{b}\)};
+        \node[state, accepting, right = 1.5cm, above left of = ab] (a) {\(\overline{a}\)};
+        \node[state, below left of = cb] (0) {\(\emptyset\)};
+        %\node[state, below right of = ab] (abc) {\(\overline{a},\overline{b},\overline{c}\)};
 
-\end{doublespace}
+        \path (e) edge [left] node {\(a\)} (cb)
+              (e) edge [right] node {\(b\)} (ca)
+              (e) edge [right] node {\(c\)} (ab)
+
+              (cb) edge [right] node {\(b\)} (c)
+              (cb) edge [left, bend left = 60] node {\(c\)} (b)
+              (cb) edge [loop left] node {\(a\)} (cb)
+
+              (ca) edge [right] node {\(a\)} (c)
+              (ca) edge [left] node {\(c\)} (a)
+              (ca) edge [loop above] node {\(b\)} (ca)
+
+              (ab) edge [left] node {\(b\)} (a)
+              (ab) edge [right, bend right = 60] node {\(a\)} (b)
+              (ab) edge [loop right] node {\(c\)} (ab)
+
+              (b) edge [bend right = 80, out looseness = 1.3, in looseness = 1.3, left] node {\(b\)} (0)
+              (b) edge [loop above] node {\(a \vee c\)} (b)
+
+              (c) edge [bend right = 60, out looseness = 1.3, in looseness = 1.3, left] node {\(c\)} (0)
+              (c) edge [in = 30, out = 60, loop, above] node {\(a \vee b\)} (c)
+
+              (a) edge [bend left = 100, out looseness = 1.8, in looseness = 1.8, right] node {\(a\)} (0)
+              (a) edge [in = 150, out = 120, loop, above] node {\(b \vee c\)} (a)
+              ;
+    \end{tikzpicture}
+\end{center}
 \end{document}
