@@ -1,0 +1,449 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[ngerman]{babel} 
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts} 
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titling}
+\usepackage{tikz}
+\usetikzlibrary{arrows, automata, positioning}
+\usepackage{csquotes} % for \textquote{}
+\usepackage{wrapfig, booktabs}
+
+
+\newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
+\newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
+\newcommand*{\gedanke}{\textbf{-- }}
+\newcommand*{\gap}{\text{ }}
+\newcommand*{\setDef}{\gap|\gap}
+\newcommand*{\vor}{\textbf{Vor.:} \gap}
+\newcommand*{\beh}{\textbf{Beh.:} \gap}
+\newcommand*{\bew}{\textbf{Bew.:} \gap}
+% Hab länger gebraucht um zu realisieren, dass das ne gute Idee wäre
+\newcommand*{\R}{\mathbb R}
+\newcommand*{\N}{\mathbb N}
+\newcommand*{\sussyImposter}{\begin{tikzpicture}
+    \amongUsIII[scale=0.1]{red}{blue}
+\end{tikzpicture}}
+
+\pagestyle{plain}
+\allowdisplaybreaks
+
+\setlength{\droptitle}{-11em}
+\setlength{\jot}{12pt}
+
+\title{Berechnungen und Logik\\Hausaufgabenserie 5}
+\author{Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
+\date{}
+
+
+\begin{document}
+\maketitle
+
+\doublespacing
+\subsection*{A1}
+\subsubsection*{a)}
+\(L_n\) für \(n = 3\) enthält alle Wörter \(w \in A^*\), welche an drittletzter Stelle eine 1 enthalten. Darüber hinaus gilt \(\vert w \vert \geq 3\).
+\subsubsection*{b)}
+(1) Der finale Zustand ist \(q_3\) anstelle von \(q_2\).\\
+(2) Die Zustandstransition \(q_0 \rightarrow q_0\) wird für Eingabe 1 hinzugefügt.\\
+(3) Die Zustandstransition \(q_1 \rightarrow q_2\) wird für Eingabe 0 hinzugefügt.\\
+(4) Die Zustandstransition \(q_1 \rightarrow q_2\) wird für Eingabe 1 hinzugefügt.\\
+Mit diesen Korrekturen erhalten wir folgenden Automaten:\\
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=2cm, semithick]
+        \node[initial, state]   (0) [right = 0cm] {\(q_0\)};
+        \node[state]            (1) [right = 3cm] {\(q_1\)};
+        \node[state]            (2) [right = 6cm] {\(q_2\)};
+        \node[state, accepting] (3) [right = 9cm] {\(q_3\)};
+
+        \path (0) edge [loop above]      node {0}   (0)
+              (0) edge [above] node {1}   (1)
+              (1) edge [above] node {0,1} (2)
+              (2) edge [above] node {0,1} (3);
+    \end{tikzpicture}
+\end{center}
+\subsubsection*{c)}
+\textbf{[insert formale Definition here]}
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=2cm, semithick, block/.style={maximum size =2cm},  font=\tiny, align = center]
+        
+        \node[state, accepting] (4) [left = 0cm, below = 0cm, text width = 1cm]       {\(\{q_0, q_3\}\)};           % 03
+        \node[state, accepting] (5) [left = 0cm, below of = 4, text width = 1cm]      {\(\{q_0, q_1,\) \\ \( q_3\}\)};      % 013
+        \node[state, accepting] (6) [left = 0cm, below of = 5, text width = 1cm]      {\(\{q_0, q_2,\) \\ \( q_3\}\)};      % 023
+        \node[state, accepting] (7) [left = 0cm, below of = 6, text width = 1cm]      {\(\{q_0, q_1,\) \\ \( q_2, q_3\}\)};  % 0123
+        \node[state]            (3) [left = 2cm, below left of = 6, text width = 1cm] {\(\{q_0, q_1,\) \\ \( q_2\}\)};      % 012
+        \node[state]            (2) [left = 2cm, below left of = 4, text width = 1cm] {\(\{q_0, q_2\}\)};           % 02
+        \node[state]            (1) [left = 2cm, below left of = 2, text width = 1cm] {\(\{q_0, q_1\}\)};           % 01
+        \node[initial, state]   (0) [left = 2cm, left of = 1, text width = 1cm]       {\(\{q_0\}\)};                % 0
+        
+        %     outgoing   what type        description target
+        \path (0) edge [above]                  node {1}      (1)
+              (0) edge [loop above]             node {0}      (0)
+              (1) edge [above]                  node {0}      (2)
+              (1) edge [above]                  node {1}      (3)
+              (2) edge [above]                  node {0}      (4)
+              (2) edge [below, bend right = 20] node {1}      (5)
+              (3) edge [above, bend left = 20]  node {0}      (6)
+              (3) edge [above]                  node {1}      (7)
+              (4) edge [above, bend right = 20] node {0}      (0)
+              (4) edge [above, bend right = 20] node {1}      (1)
+              (5) edge [above]                  node {0,1}    (2)
+              (6) edge [right, bend right = 50] node {0}      (4)
+              (6) edge [below]                  node {1}      (3)
+              (7) edge [below, bend left = 20]  node {0}      (3)
+              (7) edge [loop below]             node {1}      (7);
+    \end{tikzpicture}
+\end{center}
+\pagebreak
+
+\subsection*{A2}
+\subsubsection*{a)}
+Wir definieren für \(n \in \mathbb{N}_{\geq 1}\) einen nichtdeterministischen Automaten
+\(\mathcal{A} = (Q^{\mathcal{A}}, A, \delta, I^{\mathcal{A}}, F^{\mathcal{A}})\), mit 
+\(n+1\) Zuständen, für die Sprache \(L_n = \{w \in A^* \mid \exists u \in A^*,
+v \in A^{n-1} : w = u1v\}\) und das Alphabet \(A = \{0,1\}\) wie folgt:\\
+
+\begin{center}
+    \begin{tabular}{l c c | c c}
+        \(Q^{\mathcal{A}}= \{q_0, q_1, \ldots, q_n\}\) & \puffer \puffer & \(\delta\) & 0         & 1\\\cmidrule{3-5}
+        \(A = \{0,1\}\)                                                 &&\(q_0\)     & \(q_0\)   & \(\{q_0, q_1\}\) \\
+        \(F^{\mathcal{A}}=\{q_n\}\)                                     &&\(q_1\)     & \(q_1\)   & \(q_2\) \\
+        \(I^{\mathcal{A}} = \{q_0\}\)                                   &&\(\vdots\)  &           & \\
+                                                                        &&\(q_n\)     & undefined & undefined \\
+    \end{tabular}
+\end{center}
+\pagebreak
+\subsection*{b)}
+Für \(\mathcal{A}\) definieren wir den \textbf{DEA} \(B = (Q, A, \delta ', q_I, R)\), 
+für ein beliebiges \(n \in \mathbb{N}_{\geq 1}\), der die Sprache \(L\) aus Aufgabenteil
+\textbf{a)} akzeptiert, mit \(2^n\) Zuständen wie folgt:
+
+\begin{center}
+    \begin{tabular}{l c c | c c}
+    
+    \( Q = \mathcal{P}(Q^{\mathcal{A}})\) & \puffer \puffer  & \(\delta '\) & 0       & 1 \\\cmidrule{3-5}
+    \(A = \{0,1\}\)                                         && \(q_0\)      & \(q_0\) & \(q_1\) \\
+    \(q_I = \{q_0\}\)                                       && \(q_1\)      & \(q_2\) & \(q_3\) \\
+    \(R \subset Q\)\puffer                                  && \(\vdots\)   &         & \\
+                                                            && \(q_n\)      & \(q_{n-(\frac{1}{2}2^n)}\) & \(q_n\) \\
+    \end{tabular}
+\end{center}
+Beachte außerdem folgende Beobachtungen bezüglich \(R\):\\
+Durch die Baumstruktur des DEA gilt für die Menge der finalen Zustände 
+\(\vert R \vert = \frac{1}{2}2^n\). Außerdem gilt offensichtlich 
+\(R \cap F^{\mathcal{A}} \neq \emptyset\). \\
+Folgende Illustration soll die Struktur des DEA weiter verdeutlichen, wobei wir an 
+dieser Stelle von Rückpfeilen größtenteils abgesehen haben, da der Fokus auf der 
+allgemeinen Struktur und nicht auf der genauen Ausarbeitung liegt.
+
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=2cm, semithick, block/.style={maximum size =1.5cm},  font=\tiny, align = center]
+        \node[state, accepting] (4) [left = 0cm, below = 0cm, text width = 1cm]       {};
+        \node[state, accepting] (5) [left = 0cm, below of = 4, text width = 1cm]      {};
+        \node[state, accepting] (6) [left = 0cm, below of = 5, text width = 1cm]      {};
+        \node[state, accepting] (7) [left = 0cm, below of = 6, text width = 1cm]      {\(q_n\)};
+        \node[state]            (3) [left = 4cm, below left of = 6, text width = 1cm] {\(q_3\)};
+        \node[state]            (2) [left = 4cm, below left of = 4, text width = 1cm] {\(q_2\)};
+        \node[state]            (1) [left = 1cm, below left of = 2, text width = 1cm] {\(q_1\)};
+        \node[initial, state]   (0) [left = 1cm, left of = 1, text width = 1cm]       {\(q_0\)};
+
+        \path   (0) edge [loop above]   node    {0}     (0)
+                (0) edge [above]        node    {1}     (1)
+                (1) edge [above]        node    {0}     (2)
+                (1) edge [above]        node    {1}     (3)
+                (2) edge [above, dash pattern=on 1cm off 0.3cm on 0.5cm off 0.2cm on 0.3cm off 0.1cm on 0.1cm off 0.1cm on 0.1cm off 0.5cm on 0.1cm off 0.2cm on 0.2cm off 0.1cm]        node    {}     (4)
+                (2) edge [above, dash pattern=on 1cm off 0.3cm on 0.5cm off 0.2cm on 0.3cm off 0.1cm on 0.1cm off 0.1cm on 0.1cm off 0.5cm on 0.1cm off 0.2cm on 0.2cm off 0.1cm]        node    {}     (5)
+                (3) edge [above, dash pattern=on 1cm off 0.3cm on 0.5cm off 0.2cm on 0.3cm off 0.1cm on 0.1cm off 0.1cm on 0.1cm off 0.5cm on 0.1cm off 0.2cm on 0.2cm off 0.1cm]        node    {}     (6)
+                (3) edge [above, dash pattern=on 1cm off 0.3cm on 0.5cm off 0.2cm on 0.3cm off 0.1cm on 0.1cm off 0.1cm on 0.1cm off 0.5cm on 0.1cm off 0.2cm on 0.2cm off 0.1cm]        node    {}     (7)
+                (4) edge [above, bend right = 30, dash pattern=on 0.3cm off 0.1cm on 0.2cm off 0.1cm on 0.1cm off 0.3cm on 0.1cm off 0.5cm on 0.1cm off 0.5cm on 0.1cm off 0.5cm on 0.2cm off 0.5cm on 0.2cm off 0.3cm on 0.3cm off 0.3cm on 0.5cm off 0.1cm on 6cm] node {0} (0)
+                (4) edge [above, bend right = 35, dash pattern=on 0.3cm off 0.1cm on 0.2cm off 0.1cm on 0.1cm off 0.3cm on 0.1cm off 0.5cm on 0.1cm off 0.5cm on 0.1cm off 0.5cm on 0.2cm off 0.5cm on 0.2cm off 0.3cm on 0.3cm off 0.3cm on 0.5cm off 0.1cm on 3cm] node {1} (1);
+            \end{tikzpicture}
+\end{center}
+\pagebreak
+\subsection*{A4}
+\subsubsection*{a)}
+Für das Alphabet \(A = \{a,b\}\) geben wir folgenden regulären Ausdruck \(R\) an, 
+welcher alle Wörter \(w\) über \(A\) der Gestalt \(w = uvu\) mit \(u,v \in A^*\) 
+und \(\vert u \vert = 2\) beschreibt: \\
+\textbf{Hier noch ein ToDo: Die Wiederholung muss spezifiziert werden}\\
+\(R = (a | b)(a | b)(a | b)^*(a | b)(a | b)\)
+\subsubsection*{b)}
+Für das Alphabet \(Z = \{0, \dots, 9\}\) geben nwir folgenden regulären Ausdruck \(R\) 
+an, welcher die Sprache aller \(n \in Z^* \setminus  ( \{\epsilon\} \cup 0 \circ Z^+)\) 
+beschreibt, für die \(n \leq 1234\) gilt: \\
+\(((1 | \dots | 9)\mid ((1 | \dots | 9)(0 | \dots | 9)^*)) \mid \)\\ 
+\((1)(((1)(0 | \dots | 9)(0 | \dots | 9)) \mid (2)(((0 | \dots | 2)(0 | \dots | 9)) \mid ((3)(0 | \dots | 4))))\)
+
+\pagebreak
+\subsection*{A5}
+Für \(R = r_1 \cdot r_2 \cdot \dots \cdot r_n\) mit \(n \in \mathbb{N}\) definieren wir: \\
+\(get^{\circlearrowright} : Reg_A \rightarrow Reg_A, R \mapsto r_{1}^{\circlearrowright} \cdot r_{2}^{\circlearrowright} \cdot \dots \cdot r_{n}^{\circlearrowright} = S\)
+
+\subsection*{A6}
+(1) Automaten für die innersten Ausdrücke bilden:
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=3cm, semithick,  font=\tiny, align = center]
+        \node[initial, state, accepting, initial text=] (0)  [right = 0cm, scale = 0.3]        {};
+        \node[initial, state, initial text=]            (1)  [right = 1.5cm, scale = 0.3]      {};
+        \node[initial, state, initial text=]            (2)  [right = 3cm, scale = 0.3]        {};
+        \node[state, accepting]                         (3)  [right = 4cm, scale = 0.3]        {};
+        \node[initial, state, initial text=]            (4)  [right = 5.5cm, scale = 0.3]      {};
+        \node[state, accepting]                         (5)  [right = 6.5cm, scale = 0.3]      {};
+        \node[initial, state, initial text=]            (6)  [right = 8cm, scale = 0.3]        {};
+        \node[state, accepting]                         (7)  [right = 9cm, scale = 0.3]        {};
+        \node[initial, state, initial text=]            (8)  [right = 10.5cm, scale = 0.3]     {};
+        \node[state, accepting]                         (9)  [right = 11.5cm, scale = 0.3]     {};
+        \node[initial, state, initial text=]            (10) [right = 13cm, scale = 0.3]       {};
+        \node[state, accepting]                         (11) [right = 14cm, scale = 0.3]       {};
+
+        \path   (2) edge [above] node {a} (3)
+                (4) edge [above] node {a} (5)
+                (6) edge [above] node {b} (7)
+                (8) edge [above] node {a} (9)
+                (10) edge [above] node {a} (11);
+    \end{tikzpicture}
+\end{center}
+(2) Konkatenationen bilden (im Folgenden ignorieren wir die ersten beiden Nodes für \(\epsilon\) und \(\emptyset\)):
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=3cm, semithick,  font=\tiny, align = center]
+        \node[initial,state,initial text=]  (0) [right = 0cm, scale = 0.3]  {};
+        \node[state]                        (1) [right = 1cm, scale = 0.3]  {};
+        \node[state]                        (2) [right = 2cm, scale = 0.3]  {};
+        \node[state, accepting]             (3) [right = 3cm, scale = 0.3]  {};
+
+        \node[initial,state,initial text =] (4) [right = 4.5cm, scale = 0.3]{};
+        \node[state,accepting]              (5) [right = 5.5cm, scale = 0.3]{};
+
+        \node[initial,state,initial text=]  (6) [right = 7cm, scale = 0.3]  {};
+        \node[state]                        (7) [right = 8cm, scale = 0.3]  {};
+        \node[state]                        (8) [right = 9cm, scale = 0.3]  {};
+        \node[state,accepting]              (9) [right = 10cm, scale = 0.3] {};
+
+        \path   (0) edge [above] node {a}            (1)
+                (1) edge [above] node {\(\epsilon\)} (2)
+                (2) edge [above] node {a}            (3)
+
+                (4) edge [above] node {b}            (5)
+
+                (6) edge [above] node {a}            (7)
+                (7) edge [above] node {\(\epsilon\)} (8)
+                (8) edge [above] node {a}            (9);
+    \end{tikzpicture}
+\end{center}
+(3) Sternoperationen für \(a\) bilden:
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=3cm, semithick,  font=\tiny, align = center]
+        \node[initial,state,accepting,initial text=] (0) [right = 0cm, scale = 0.3]{};
+        \node[state](1)[right=1cm, scale = 0.3]{};
+        \node[state](2)[right=2cm, scale = 0.3]{};
+        \node[state](3)[right=3cm, scale = 0.3]{};
+        \node[state,accepting](4)[right=4cm,scale=0.3]{};
+
+        \node[initial,state,initial text =] (5) [right = 5.5cm, scale = 0.3]{};
+        \node[state,accepting]              (6) [right = 6.5cm, scale = 0.3]{};
+
+        \node[initial,state,accepting,initial text=](7)[right = 8cm, scale=0.3]{};
+        \node[state](8)[right = 9cm, scale = 0.3]{};
+        \node[state](9)[right=10cm,scale=0.3]{};
+        \node[state](10)[right=11cm,scale=0.3]{};
+        \node[state,accepting](11)[right=12cm,scale=0.3]{};
+
+        \path   (0) edge [above] node {\(\epsilon\)} (1)
+                (1) edge [above] node {a} (2)
+                (2) edge [above] node {\(\epsilon\)} (3)
+                (3) edge [above] node {a} (4)
+                (4) edge [below, bend left = 30] node {\(\epsilon\)} (1)
+
+                (5) edge [above] node {b} (6)
+
+                (7) edge [above] node {\(\epsilon\)} (8)
+                (8) edge [above] node {a} (9)
+                (9) edge [above] node {\(\epsilon\)} (10)
+                (10) edge [above] node {a} (11)
+                (11) edge [below, bend left = 30] node {\(\epsilon\)} (8);
+    \end{tikzpicture}
+\end{center}
+(4) Sternoperation für \(b\) bilden:
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=3cm, semithick,  font=\tiny, align = center]
+        \node[initial,state,accepting,initial text=] (0) [right = 0cm, scale = 0.3]{};
+        \node[state](1)[right=1cm, scale = 0.3]{};
+        \node[state](2)[right=2cm, scale = 0.3]{};
+        \node[state](3)[right=3cm, scale = 0.3]{};
+        \node[state,accepting](4)[right=4cm,scale=0.3]{};
+
+        \node[initial,state,initial text =] (5) [right = 5.5cm, scale = 0.3]{};
+        \node[state]              (6) [right = 6.5cm, scale = 0.3]{};
+        \node[state,accepting]  (7) [right = 7.5cm,scale=0.3]{};
+
+        \node[initial,state,accepting,initial text=](8)[right = 9cm, scale=0.3]{};
+        \node[state](9)[right = 10cm, scale = 0.3]{};
+        \node[state](10)[right=11cm,scale=0.3]{};
+        \node[state](11)[right=12cm,scale=0.3]{};
+        \node[state,accepting](12)[right=13cm,scale=0.3]{};
+        
+        \path   (0) edge [above] node {\(\epsilon\)} (1)
+            (1) edge [above] node {a} (2)
+            (2) edge [above] node {\(\epsilon\)} (3)
+            (3) edge [above] node {a} (4)
+            (4) edge [below, bend left = 30] node {\(\epsilon\)} (1)
+
+            (5) edge [above] node {\(\epsilon\)} (6)
+            (6) edge [above] node {b} (7)
+            (7) edge [below, bend left = 55] node {\(\epsilon\)} (6)
+
+            (8) edge [above] node {\(\epsilon\)} (9)
+            (9) edge [above] node {a} (10)
+            (10) edge [above] node {\(\epsilon\)} (11)
+            (11) edge [above] node {a} (12)
+            (12) edge [below, bend left = 30] node {\(\epsilon\)} (9);
+    \end{tikzpicture}
+\end{center}
+(5) Konkatenation linke Seite bilden:
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=3cm, semithick,  font=\tiny, align = center]
+        \node[initial,state,accepting,initial text=](0)[right=0cm,scale=0.3]{};
+        \node[state](1)[right=1cm,scale=0.3]{};
+        \node[state](2)[right=2cm,scale=0.3]{};
+        \node[state](3)[right=3cm,scale=0.3]{};
+        \node[state](4)[right=4cm,scale=0.3]{};
+        \node[state,accepting](5)[right=5cm,scale=0.3]{};
+        \node[state](6)[right=6cm,scale=0.3]{};
+        \node[state,accepting](7)[right=7cm,scale=0.3]{};
+
+        \node[initial,state,accepting,initial text=](8)[right = 8.5cm, scale=0.3]{};
+        \node[state](9)[right = 9.5cm, scale = 0.3]{};
+        \node[state](10)[right=10.5cm,scale=0.3]{};
+        \node[state](11)[right=11.5cm,scale=0.3]{};
+        \node[state,accepting](12)[right=12.5cm,scale=0.3]{};
+        
+        \path   (0) edge [above] node {\(\epsilon\)} (1)
+                (1) edge [above] node {a} (2)
+                (2) edge [above] node {\(\epsilon\)} (3)
+                (3) edge [above] node {a} (4)
+                (4) edge [above] node {\(\epsilon\)} (5)
+                (4) edge [below, bend left = 30] node {\(\epsilon\)} (1)
+                (5) edge [above] node {\(\epsilon\)} (6)
+                (6) edge [above] node {b} (7)
+                (7) edge [below,bend left = 40] node {\(\epsilon\)}(5)
+
+            (8) edge [above] node {\(\epsilon\)} (9)
+            (9) edge [above] node {a} (10)
+            (10) edge [above] node {\(\epsilon\)} (11)
+            (11) edge [above] node {a} (12)
+            (12) edge [below, bend left = 30] node {\(\epsilon\)} (9);
+    \end{tikzpicture}
+\end{center}
+(6) Sternoperation für \((aa^*b^*)^*\) bilden:
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=3cm, semithick,  font=\tiny, align = center]
+        \node[initial,state,accepting,initial text=](0)[right=0cm,scale=0.3]{};
+        \node[state](1)[right=1cm,scale=0.3]{};
+        \node[state](2)[right=2cm,scale=0.3]{};
+        \node[state](3)[right=3cm,scale=0.3]{};
+        \node[state](4)[right=4cm,scale=0.3]{};
+        \node[state](5)[right=5cm,scale=0.3]{};
+        \node[state,accepting](6)[right=6cm,scale=0.3]{};
+        \node[state](7)[right=7cm,scale=0.3]{};
+        \node[state,accepting](8)[right=8cm,scale=0.3]{};
+
+        \node[initial,state,accepting,initial text=](9)[right=9.5cm,scale=0.3]{};
+        \node[state](10)[right=10.5cm,scale=0.3]{};
+        \node[state](11)[right=11.5cm,scale=0.3]{};
+        \node[state](12)[right=12.5cm,scale=0.3]{};
+        \node[state,accepting](13)[right=13.5cm,scale=0.3]{};
+
+        \path   (0) edge [above] node {\(\epsilon\)} (1)
+                (1) edge [above] node {\(\epsilon\)} (2)
+                (2) edge [above] node {a} (3)
+                (3) edge [above] node {\(\epsilon\)} (4)
+                (4) edge [above] node {a} (5)
+                (4) edge [below, bend left = 30] node {\(\epsilon\)} (1)
+                (5) edge [above] node {\(\epsilon\)} (6)
+                (6) edge [above] node {\(\epsilon\)} (7)
+                (8) edge [above, bend right = 50] node {\(\epsilon\)} (6)
+                (7) edge [above] node {b}(8)
+                (8) edge [below, bend left = 30] node {\(\epsilon\)} (0)
+
+                (9) edge [above] node {\(\epsilon\)} (10)
+                (10) edge [above] node {a} (11)
+                (11) edge [above] node {\(\epsilon\)} (12)
+                (12) edge [above] node {a} (13)
+                (13) edge [below, bend left = 30] node {\(\epsilon\)} (10);
+    \end{tikzpicture}
+\end{center}
+(7) Konkatenation der beiden Automaten bilden:
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=3cm, semithick,  font=\tiny, align = center]
+        \node[initial,state,accepting,initial text=](0)[right=0cm,scale=0.3]{};
+        \node[state](1)[right=1cm,scale=0.3]{};
+        \node[state](2)[right=2cm,scale=0.3]{};
+        \node[state](3)[right=3cm,scale=0.3]{};
+        \node[state](4)[right=4cm,scale=0.3]{};
+        \node[state](5)[right=5cm,scale=0.3]{};
+        \node[state,accepting](6)[right=6cm,scale=0.3]{};
+        \node[state](7)[right=7cm,scale=0.3]{};
+        \node[state](8)[right=8cm,scale=0.3]{};
+        \node[state](9)[right=9cm,scale=0.3]{};
+        \node[state](10)[right=10cm,scale=0.3]{};
+        \node[state](11)[right=11cm,scale=0.3]{};
+        \node[state](12)[right=12cm,scale=0.3]{};
+        \node[state,accepting](13)[right=13cm,scale=0.3]{};
+
+        \path   (0) edge [above] node {\(\epsilon\)} (1)
+                (1) edge [above] node {\(\epsilon\)} (2)
+                (2) edge [above] node {a} (3)
+                (3) edge [above] node {\(\epsilon\)} (4)
+                (4) edge [above] node {a} (5)
+                (5) edge [above, bend right = 40] node {\(\epsilon\)} (1)
+                (5) edge [above] node {\(\epsilon\)} (6)
+                (6) edge [above] node {\(\epsilon\)} (7)
+                (7) edge [above] node {b} (8)
+                (8) edge [above, bend right = 50] node {\(\epsilon\)} (6)
+                (8) edge [above] node {\(\epsilon\)} (9)
+                (8) edge [below, bend left = 20] node {\(\epsilon\)} (0)
+                (9) edge [above] node {\(\epsilon\)} (10)
+                (10) edge [above] node {a} (11)
+                (11) edge [above] node {\(\epsilon\)} (12)
+                (12) edge [above] node {a} (13)
+                (13) edge [below, bend left = 30] node {\(\epsilon\)} (10);
+    \end{tikzpicture}
+\end{center}
+(8) Eliminierung der \(\epsilon\)-Kanten:
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=3cm, semithick,  font=\tiny, align = center]
+        \node[initial,state,accepting,initial text=](0)[right=0cm]{};
+        \node[state](1)[right=2cm]{};
+        \node[state](2)[right=4cm]{};
+        \node[state,accepting](3)[right=6cm]{};
+
+        \path   (0) edge [loop above] node {a} (0)
+                (0) edge [above] node {a} (1)
+                (1) edge [above] node {b} (2)
+                (2) edge [loop above] node {b} (2)
+                (2) edge [above] node {a} (3)
+                (3) edge [loop above] node {a} (3)
+                (2) edge [below, bend left = 50] node {a,b*} (0);
+    \end{tikzpicture}
+\end{center}
+\textit{Es benötigt den Rückpfeil a,b an dieser Stelle nicht. Wir führen ihn hier der Vollständigkeit 
+halber auf, reduzieren dann im nächsten Schritt jedoch, um Redundanz zu vermeiden.}
+
+(9) Eliminierung von Redundanzen:
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=3cm, semithick,  font=\tiny, align = center]
+        \node[initial,state,initial text=](0)[right=0cm]{};
+        \node[state](1)[right=2cm]{};
+        \node[state,accepting][right=4cm]{};
+
+        \path   (0) edge [loop above] node {a} (0)
+                (0) edge [below] node {b} (1)
+                (1) edge [loop above] node {b} (1)
+                (1) edge [below] node {a} (2)
+                (2) edge [loop above] node {a} (2);
+    \end{tikzpicture}
+\end{center}
+\end{document}
