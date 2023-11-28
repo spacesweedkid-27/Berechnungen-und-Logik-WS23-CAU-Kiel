@@ -1,0 +1,90 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[ngerman]{babel} 
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts} 
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titling}
+\usepackage{csquotes} % for \textquote{}
+\usepackage{tikz}
+\usetikzlibrary{arrows, automata, positioning}
+
+\newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
+\newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
+\newcommand*{\gedanke}{\textbf{-- }}
+\newcommand*{\gap}{\text{ }}
+\newcommand*{\setDef}{\gap|\gap}
+\newcommand*{\vor}{\textbf{Vor.:} \gap}
+\newcommand*{\beh}{\textbf{Beh.:} \gap}
+\newcommand*{\bew}{\textbf{Bew.:} \gap}
+% Hab länger gebraucht um zu realisieren, dass das ne gute Idee wäre
+\newcommand*{\R}{\mathbb R}
+
+
+\pagestyle{plain}
+\allowdisplaybreaks
+
+\setlength{\droptitle}{-11em}
+\setlength{\jot}{12pt}
+\setlength{\hoffset}{-0.5in}
+\setlength{\textwidth}{435pt}
+
+\title{Berechnungen und Logik\\Hausaufgabenserie 6}
+\author{Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
+\date{}
+
+
+\begin{document}
+\maketitle
+
+\doublespacing
+\vspace*{-2cm}
+\subsection*{A1}
+\subsubsection*{a)}
+\vor Sei \(A\) Alphabet. \(L_1 := \{w \in \{a,b\}^* \setDef w = w^R\}\), wobei \(\cdot^R : A^* \rightarrow A^*\) wie folgt:\\
+IB für \(w \in A^*, a \in A\): \((a \cdot r)^R := r^R \cdot a\)\\
+IS für \(a \in A \cup \{\epsilon\}\): \(a^R := a\) \\
+Außerdem: \(\cdot//\cdot: \mathbb{N}^2 \rightarrow \mathbb N, (a,b) \mapsto \left\lfloor \frac{a}{b} \right\rfloor\) und: \(\cdot\%\cdot : \mathbb{N}^2 \rightarrow \mathbb N, (a,b) \mapsto a - b \cdot \left\lfloor \frac{a}{b} \right\rfloor\).\\
+Diese beiden Operatoren sind Implementierungen der bekannten \\ abgerundeten ganzzahligen Division und dem Modulo. \\
+\beh \(L_1\) ist nicht regulär. \\
+\bew Wir zeigen dies, indem wir die Kontraposition des Pumping-Lemmas zeigen,\\ d.h. es ist zu zeigen:
+\(\forall m \in \mathbb N_{\ge 1}: \exists w \in \{a,b\}^m: \forall x,y,z \in \{a,b\}^*, w = xyz, |y| \ge 1:\)\\
+\(\puffer\puffer\puffer\puffer\puffer\puffer\puffer\exists i,j \in \mathbb{N}, v \in \{a,b\}^*: xy^izv \in L_1 \not\Leftrightarrow xy^jzv \in L_1\)\\
+Sei also \(m \in \mathbb N_{\ge 1}\).\\
+Wähle \(w = a^{(m//2) - 1} \cdot b \cdot b^{m\% 2} \cdot b \cdot a^{(m//2) - 1}\).\\
+Im Falle, dass \(m\) ungerade ist, haben wir also ein \textquote{extra} \(b\) in der Mitte, sodass das Wort \(w\) Palindrom ist und gleichzeitig immer noch wahrlich genauso lang wie \(m\) ist. \\
+Sei dementsprechend \(xyz\) eine Zerlegung von \(w\) mit \(|y| \ge 1\). Wir wählen \(v = (xyz)^R\). \\
+Dann gilt offenbar für \(i = 1\): \(xy^izv = xyzv = xyz(xyz)^R \in L_1\). \\
+Jedoch gilt für \(j = 2\): \(xy^jzv = xyyzv = xyyz(xyz)^R \not\in L_1\), da \(|y| \ge 1\) vorausgesetzt. \\
+Also gilt \(xy^izv \in L_1 \not\Rightarrow xy^jzv \in L_1\), woraus folgt: \(xy^izv \in L_1 \not\Leftrightarrow xy^jzv \in L_1\),\\
+\gedanke was zu zeigen war. \qed
+\pagebreak
+\subsubsection*{b)}
+\(L_2\) ist die Menge der Palindrome über \(\{a,b\}\) vereint mit der Menge an Wörtern, die keine Palindrome sind, es folgt: \(L_2 = \{a,b\}^*\), somit lässt sich ein DEA konstruieren, der einfach jedes Wort aus \(\{a,b\}^*\) akzeptiert:\vspace*{-0.5cm}
+\[\mathcal A := \{\{\text{OK}\}, \{a,b\}, \{((\text{OK}, a), \text{OK}), ((\text{OK}, b), \text{OK})\}, \text{OK}, \{\text{OK}\}\}\]
+Diese Funktionsschreibweise ist etwas umständlich, aber bei kleinen Relationen lässt sich die Tupelschreibweise verwenden. Man sieht, dass diese Transitionsfunktion immer OK auf sich selbst abbildet und wohldefiniert ist.\\
+Es ergibt sich folgendes Zustandsdiagramm:
+
+\vspace*{-1.8cm}
+\hspace*{+10cm}
+\begin{tikzpicture}[->, >=stealth', node distance=2cm, semithick, block/.style={maximum size =1.5cm},  font=\tiny, align = center]
+    \node[initial, state, accepting] (ok) {\text{OK}};
+    \path (ok) edge [loop above] node {a} (ok)
+          (ok) edge [loop below] node {b} (ok);
+\end{tikzpicture} \vspace*{-1cm}
+\onehalfspacing
+\subsubsection*{c)}
+\vor \(L_2 := \{0^{(2^n)} \setDef n \in \mathbb N_0\}\). \\
+\beh \(L_2\) ist nicht regulär. \\
+\bew Wir verwenden das gleiche Schema, wie in \textbf{a)}.\\Die Quantorenkette werden wir jetzt nicht ausschreiben. \\
+Sei also \(m\in \mathbb{N}_{\ge 1}\), wähle \(w := 0^{(2^n)}\) und \(xyz := w\) mit \(|y|\ge 1\). \\
+Wähle \(v := xyz\), dann gilt: \(xy^1zv = xyzxyz \in L_2\), also existiert ein \(i = 1\). \\
+Sei \(j = 2\), dann gilt folgendes: \(xy^jzv = xyyzv = yyxzv\). Es gilt, dass jeder Buchstabe der Wörter 0 ist, weswegen wir uns nur die Kardinalitäten dieser Kompositionen anschauen werden.\\
+Es gilt: \(|y| \in [1, 2^m]_\mathbb N\), da \(|xyz| = 2^m\) gilt, was die maximale Kardinalität von \(y\) ist, und da \(|y| \ge 1\) gilt. \\
+Es folgt: \(|yyxzv| = |y| + 2^m + 2^m = |y| + 2^{m+1}\). \\
+Damit diese Kardinalität eine Zweierpotenz sein soll, müsste \(|y| \ge 2^{m+1}\) gelten, aber da \(|y|\) maximal \(2^m\) ist, fehlt uns im besten Fall immer noch ein Viertel.\\
+Damit gilt somit \(xy^izv \in L_2 \not\Rightarrow xy^jzv \in L_2\), \gedanke was wie zuvor, zu zeigen war. \qed
+\subsubsection*{d)}
+\end{document}
