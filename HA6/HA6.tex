@@ -8,10 +8,12 @@
 \usepackage{amssymb}
 \usepackage{titling}
 \usepackage{csquotes} % for \textquote{}
+\usepackage{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{arrows, automata, positioning}
 
 \newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
+\newcommand*{\lqed}{\null\nobreak\hfill\ensuremath{\blacksquare}}
 \newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
 \newcommand*{\gedanke}{\textbf{-- }}
 \newcommand*{\gap}{\text{ }}
@@ -118,5 +120,38 @@ Hiermit lässt sich ein DEA komposieren, der \(L_4\) erkennt, welcher dargestell
             (+2) edge [below left] node {b} (ack);
 \end{tikzpicture}
 \end{center}
-Dieser Automat erkennt genau \(L_4\), so ist \(L_4\) regulär. \qed
+Dieser Automat erkennt genau \(L_4\), so ist \(L_4\) regulär. \qed \pagebreak
+\subsection*{A2}
+\doublespacing
+\subsubsection*{a)}
+\vor \(A := \{\uparrow, \rightarrow, \downarrow, \leftarrow\}, L_1 := \{p \in A^* \setDef p \text{ beginnt und endet am selben Punkt.}\}\) \\
+\beh \(L_1\) ist nicht regulär. \\
+\bew Wir zeigen wieder nach Pumping-Lemma, d.h. es ist zu zeigen: \\
+\puffer\puffer\puffer\(\forall m \in \mathbb N_{\ge 1}:\) \\
+\puffer\puffer\puffer\(\exists w \in A^m: \forall x,y,z \in A^*, w = xyz, |y| \ge 1:\)\\
+\puffer\puffer\puffer\(\exists i,j \in \mathbb{N}, v \in A^*: xy^izv \in L_1 \not\Leftrightarrow xy^jzv \in L_1\)\\
+Sei also \(m \in \mathbb N_{\ge 1}\). Setze \(w := \rightarrow^m\) und \(v := \leftarrow^m\).\footnote[1]{\textquote{\textit{Perfectly balanced, \gedanke as all things should be.}}} \\
+Sei \(xyz := w\) mit \(|y| \ge 1\) Zerlegung von \(w\). \\
+Dann gilt \textbf{Fall 1 (\(i = 1\)):} \(xy^izv = xyzv \in L_1\), da \(|w| = |v|\). \\
+Des Weiteren gilt \textbf{Fall 2 (\(j = 2\)):} \(xy^jzv = xyyzv = yxyzv = ywz = \rightarrow^{|y|} \cdot \rightarrow^{|m|} \cdot \leftarrow^{|m|}\) \\
+Da \(|y| \ge 1\) folgt: \(\rightarrow^{|y|} \ne \epsilon\). Mit \(y \in \{\rightarrow\}^+\) gilt somit \(xy^jzw \not\in L_1\). \\
+Also gilt: \(\exists i,j \in \mathbb{N}, v \in A^*: xy^izv \in L_1 \not\Leftrightarrow xy^jzv \in L_1\), \gedanke was zu zeigen war. \qed
+\pagebreak
+\subsubsection*{b)}
+\vor \(L_2 := \{a^{m \cdot n} \setDef n,m \in \mathbb N_{> 1}\} \cup \{\epsilon, a\}\),\gap\gap \(\mathbb P \subset \mathbb N: 2 \in \mathbb P, p \in \mathbb P \Rightarrow \forall n \in \mathbb N_{> 1}: p\cdot n \not\in \mathbb P\) \\
+\beh \(L_2\) ist nicht regulär. \\
+\bew Es gilt: \(L_2 = \{a^{m \cdot n} \setDef n,m \in \mathbb N_{> 1}\} \cup \{\epsilon, a\} = \{a^p \setDef p \not\in \mathbb P\}\). Sei hierfür bewusst, dass die Menge der Primzahlen gleiche Kardinalität zur Menge der natürlichen Zahlen hat, also dass \(|\mathbb P| = |\mathbb N|\) gilt. \\
+\textbf{Lemma} \(\forall L: L \in \text{Reg} \Leftrightarrow \overline{L} \in \text{Reg}\): \\
+\textquote{\(\Rightarrow\)}:\\
+Sei \(M := \{Q, A, \delta, I, F\}\) NEA der \(L\) akzeptiert, dann ist \(\overline{M} := \{Q, A, \delta, F, I\}\) ein NEA, der \(\overline{L}\) akzeptiert. Folgt aus Definition von NEA und Akzeptanz bzw. Berechnung.\\
+\textquote{\(\Leftarrow\)}:\\
+folgt aus vorherigen Teil, denn \(F,I\) lassen sich zurücktauschen. \lqed\\
+Nach dem Lemma zeigen wir somit, dass \(\overline{L_2}\) nicht regulär ist. Es gilt: \(\overline{L_2} = \{a^p \setDef p \in \mathbb P\}\)\\
+Wir zeigen wieder mittels des Pumping-Lemmas.\\
+Nehme also \(m \in \mathbb N\), sei \(w := a^m\), sei \(xyz := w\) Zerlegung von \(w\) mit \(|y| \ge 1\). \\
+Sei auch \(v := a^{p - |m|}\), wobei \(p := \min(\mathbb P_{\ge m})\) gilt.\footnote[2]{Es \textquote{sei} hier auch wieder bewusst, dass es abzählbar unendliche Primzahlen gibt.}\\
+Dann gilt Folgendes: \\
+Sei \(i := 0\), dann gilt: \(xy^izv = xzv = a^{m-1} \cdot a^{p-m} = a^{m-1+p-m} = a^{p-1} \not\in \overline{L_2}\), da nach Def. \(\mathbb P\) der Abstand von zwei Primzahlen größer als 2 sein muss, denn \(2 | (p\pm 1)\) gilt.\\
+Sei \(j := 0\), dann gilt: \(xy^jzv = xyzv = a^m \gap\gap \cdot a^{p-m} = a^{m+p-m} \gap\gap\gap = a^{p} \in \overline{L_2}\), nach \(\overline{L_2}\).\\
+Dann gilt: \(\exists i,j \in \mathbb{N}, v \in \{a\}^*: xy^izv \in \overline{L_2} \not\Leftrightarrow xy^jzv \in \overline{L_2}\). Damit ist \(\overline{L_2}\) nicht regulär, folglich ist auch \(L_2\) nicht regulär, \gedanke was zu zeigen war. \qed
 \end{document}

@@ -3,4 +3,5 @@
 **/*.fls
 **/*.log
 **/*.gz
+**/*.out
 praeambel.pdf
