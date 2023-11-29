@@ -22,6 +22,11 @@
 % Hab länger gebraucht um zu realisieren, dass das ne gute Idee wäre
 \newcommand*{\R}{\mathbb R}
 
+\newenvironment{noalign*}
+ {\setlength{\abovedisplayskip}{0pt}\setlength{\belowdisplayskip}{0pt}%
+  \csname flalign*\endcsname}
+ {\csname endflalign*\endcsname\ignorespacesafterend}
+
 
 \pagestyle{plain}
 \allowdisplaybreaks
@@ -76,15 +81,42 @@ Es ergibt sich folgendes Zustandsdiagramm:
 \end{tikzpicture} \vspace*{-1cm}
 \onehalfspacing
 \subsubsection*{c)}
-\vor \(L_2 := \{0^{(2^n)} \setDef n \in \mathbb N_0\}\). \\
-\beh \(L_2\) ist nicht regulär. \\
+\vor \(L_3 := \{0^{(2^n)} \setDef n \in \mathbb N_0\}\). \\
+\beh \(L_3\) ist nicht regulär. \\
 \bew Wir verwenden das gleiche Schema, wie in \textbf{a)}.\\Die Quantorenkette werden wir jetzt nicht ausschreiben. \\
 Sei also \(m\in \mathbb{N}_{\ge 1}\), wähle \(w := 0^{(2^n)}\) und \(xyz := w\) mit \(|y|\ge 1\). \\
-Wähle \(v := xyz\), dann gilt: \(xy^1zv = xyzxyz \in L_2\), also existiert ein \(i = 1\). \\
+Wähle \(v := xyz\), dann gilt: \(xy^1zv = xyzxyz \in L_3\), also existiert ein \(i = 1\). \\
 Sei \(j = 2\), dann gilt folgendes: \(xy^jzv = xyyzv = yyxzv\). Es gilt, dass jeder Buchstabe der Wörter 0 ist, weswegen wir uns nur die Kardinalitäten dieser Kompositionen anschauen werden.\\
 Es gilt: \(|y| \in [1, 2^m]_\mathbb N\), da \(|xyz| = 2^m\) gilt, was die maximale Kardinalität von \(y\) ist, und da \(|y| \ge 1\) gilt. \\
 Es folgt: \(|yyxzv| = |y| + 2^m + 2^m = |y| + 2^{m+1}\). \\
 Damit diese Kardinalität eine Zweierpotenz sein soll, müsste \(|y| \ge 2^{m+1}\) gelten, aber da \(|y|\) maximal \(2^m\) ist, fehlt uns im besten Fall immer noch ein Viertel.\\
-Damit gilt somit \(xy^izv \in L_2 \not\Rightarrow xy^jzv \in L_2\), \gedanke was wie zuvor, zu zeigen war. \qed
+Damit gilt somit \(xy^izv \in L_3 \not\Rightarrow xy^jzv \in L_3\), \gedanke was wie zuvor, zu zeigen war. \qed
 \subsubsection*{d)}
+\vor \(L_4 := \{w^Rbwbw^R \in \{a,b\}^* \setDef w \in \{b\}^*\}\) \\
+\beh \(L_4\) ist regulär. \\
+\bew Es gilt \(\forall w \in \{b\}^*: w^R = w\), da \(w\) schließlich nur aus dem gleichen Buchstaben besteht. Betrachte die folgende Umformung:
+\begin{noalign*}
+    & \{w^Rbwbw^R \in \{a,b\}^* \setDef w \in \{b\}^*\} & \text{|Folgerung, Komposition ist immer aus \(\{b\}^*\)} \\
+    = & \{wbwbw \setDef w \in \{b\}^*\} & \text{| Reihenfolge macht keinen Unterschied, weil nur \(b\)'s im Wort sind} \\
+    = & \{bbwww \setDef w \in \{b\}^*\} & \text{| Rausziehen (wir betrachten das Bild)} \\
+    = & bb \cdot \{www \setDef w \in \{b\}^*\} & \text{| Def. \(\cdot^*\) für Mengen} \\
+    = & bb \cdot \{w \in \{b\}^* \setDef |w| \in 3\mathbb N\}
+\end{noalign*}
+Wir suchen also Wörter für die Folgendes gilt: \(w : w \in \{b\}^* |w| = 3n + 2\) für \(n \in \mathbb N\). \\
+Hiermit lässt sich ein DEA komposieren, der \(L_4\) erkennt, welcher dargestellt ist in folgender Illustration:
+\begin{center} \vspace*{-0.7cm}
+\begin{tikzpicture}[->, >=stealth', node distance=2cm, semithick, block/.style={maximum size =1.5cm},  font=\small, align = center]
+    \node[initial, state] (e) {\(\epsilon\)};
+    \node[state, right of = e] (1) {1};
+    \node[state, accepting, right of = 1] (ack) {\text{OK}};
+    \node[state, right = 0.8cm, above right of = ack] (+1) {+1};
+    \node[state, right = 0.8cm, below right of = ack] (+2) {+2};
+    \path   (e) edge [above] node {b} (1)
+            (1) edge [above] node {b} (ack)
+            (ack) edge [above left] node {b} (+1)
+            (+1) edge [right] node {b} (+2)
+            (+2) edge [below left] node {b} (ack);
+\end{tikzpicture}
+\end{center}
+Dieser Automat erkennt genau \(L_4\), so ist \(L_4\) regulär. \qed
 \end{document}
