@@ -261,4 +261,42 @@ Für das Wort \(abbb\) erhalten wir mit \(DTM_{Pal}\) folgende Berechnung: \\
 5. \textvisiblespace \(b b b q_3\)\\
 6. \textvisiblespace \(b b q_{rej}\) \textvisiblespace\\
 
+\subsection*{A4}
+\subsubsection*{a)}
+Diese Aussage ist korrekt. Es lässt sich für jede Sprache ein DEA konstruieren, von 
+dessen Startzustand aus für alle Eingaben ein weiterer Zustand \({q_1}_M\) existiert, 
+welcher bei Bedarf eingehende Transitionen besitzt. 
+
+\subsubsection*{b)}
+Diese Aussage ist inkorrekt. Es kann für Wörter beliebig langer Länge kein DEA konzipiert 
+werden, dessen akzeptierenden Zustände keine ausgehenden Transitionen akzeptiert. \\
+Betrachte beispielsweise einen Automaten \(M\), welcher alle Wörter einer Sprache \(A=\{a,b\}\) 
+erkennt, welche mit dem Buchstaben \(a\) beginnen. Dieser lässt sich für beliebig lange Wörter 
+nur mit einer ausgehenden Transition für den akzeptierenden Zustand konstruieren.
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=2cm, semithick,  font=\small, align = center, sloped]
+    
+        \node[initial,state](0)[right=0cm]{\(q_0\)};
+        \node[state](2)[below of = 0]{\(q_2\)};
+        \node[state,accepting](1)[right=2cm]{\(q_1\)};
+
+        \path   (0) edge [above] node {a} (1)
+                (0) edge [above] node {b} (2)
+                (2) edge [loop below] node {a,b} (2)
+                (1) edge [loop above] node {a,b} (1);
+    
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection*{c)}
+Diese Aussage ist inkorrekt. Betrachte dafür wieder den Automaten aus Aufgabenteil b. 
+Es ist bei diesem notwendig, für das erste Eingabesymbol eine Trennung durch Zustände 
+vorzunehmen. In diesem Fall sind beide vom Startzustand erreichbaren Zustände nur durch 
+unterschiedliche Eingabesymbole \(a \in A\) erreichbar. 
+
+\subsubsection*{d)}
+Diese Aussage ist nach Ausschlussprinzip korrekt. Darüber hinaus gilt per Definition, dass 
+bei einem DEA für jeden Zustand Transitionen für alle Eingabesymbole definiert sind. Das führt 
+zu der Erkenntnis, dass für jede durch einen DEA erkennbare Sprache ein oder mehrere 
+"Auffangzustände" definiert werden können, welche dieser Eigenschaft entsprechen. 
 \end{document}
