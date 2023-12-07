@@ -1,0 +1,75 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[ngerman]{babel} 
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts} 
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titling}
+\usepackage{csquotes} % for \textquote{}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows, automata, positioning}
+
+\newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
+\newcommand*{\lqed}{\null\nobreak\hfill\ensuremath{\blacksquare}}
+\newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
+\newcommand*{\gedanke}{\textbf{-- }}
+\newcommand*{\gap}{\text{ }}
+\newcommand*{\setDef}{\gap|\gap}
+\newcommand*{\vor}{\textbf{Vor.:} \gap}
+\newcommand*{\beh}{\textbf{Beh.:} \gap}
+\newcommand*{\bew}{\textbf{Bew.:} \gap}
+% Hab länger gebraucht um zu realisieren, dass das ne gute Idee wäre
+\newcommand*{\R}{\mathbb R}
+
+\newenvironment{noalign*}
+ {\setlength{\abovedisplayskip}{0pt}\setlength{\belowdisplayskip}{0pt}%
+  \csname flalign*\endcsname}
+ {\csname endflalign*\endcsname\ignorespacesafterend}
+
+
+
+\pagestyle{plain}
+\allowdisplaybreaks
+
+\setlength{\droptitle}{-11em}
+\setlength{\jot}{12pt}
+%\setlength{\hoffset}{-1in}     Wenn nötig
+%\setlength{\textwidth}{535pt}  Wenn nötig
+
+\title{Berechnungen und Logik\\Hausaufgabenserie 8}
+\author{Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
+\date{}
+
+
+\begin{document}
+\maketitle
+
+\onehalfspacing
+\vspace*{-2cm}
+\subsection*{A1}
+\subsubsection*{a)}
+\subsection*{A2}
+\subsection*{A3}
+\beh Eine Turingmaschiene mit einem beidseitig unendlichem Band entscheidet genau die gleichen Sprachen, wie eine einseitig unendliche Turingmaschiene. \\
+\bew Wir teilen den Beweis in zwei Richtungen auf: \\
+\textbf{1. } \textquote{\(\Rightarrow\)} \\
+Es wurde in der Vorlesung bereits gezeigt, dass k-bändige Turingmaschiene gleichmächtig sind, wie einbändige, deswegen zeigen wir, dass für jede beidseitige Turingmaschine eine beidbandige Turingmaschiene existiert. \\
+Betrachten wir eine beidseitige Turingmaschiene. \\
+Dann existiert folgende beidbandige Turingmaschiene: Wir nennen Band 1 \textquote{rechtes Band} und Band 2 \textquote{linkes Band}. Für jegliches beschriftete Band, dass verwendet wird werden das linke Band und das rechte Band so aufgeteilt, dass das linke Band die gespiegelte linke Hälfte des originalen Bandes ist und das rechte Band die rechte Hälfte des originalen Bandes ist. Die Mitte ist dabei der Start des rechten Bandes.\\
+Transformiere nun beide Bänder nochmal, so, dass ein Buchstabe, der nicht im Bandalphabet rechts bzw. links vom linken bzw. rechtem Band angefügt wird. Dieser Buchstabe representiert die Mitte des originalen Bandes. \\
+Nun adjustieren wir die Transitionsfunktion so, dass folgendes gilt:\\
+Starte auf dem zweiten Buchstaben des rechten Bandes\footnote[1]{wir betrachten hier eine zweibandige Turingmaschiene, wessen Bänder nicht synchronisiert sind, also wo wir nicht sozusagen Tupel betrachten, dass diese Turingmaschienen mit den synchonen k-bandigen äquivalent sind in der Stärke, ließe sich leicht zeigen, aber wir werden nicht uns nicht darauf fokussieren in diesem Beweis um ihn nicht unnötig in die Länge zu ziehen, \gedanke wie sonst.}.\\
+Wir rechnen so lange genau so, wie in der ursprünglichen Turingmaschiene, bis wir (falls überhaupt) die Markierung erreichen. \\
+Dann rechne mit invertierten Bewegungsaktionen bei der zweiten Stelle des linken Bandes weiter (also nicht auf der Markierung, sonst würden wir ja wieder zurück \textquote{springen}).\\
+Wenn wieder die Markierung erreicht wird, fahre wieder im \textquote{originalen} Modus rechts weiter auf der zweiten Stelle. \\
+Wir ersetzen sozusagen die Linke unendliche Hälfte der ursprünglichen Turingmaschiene mit einem einzelnen Band. \\
+Eine andere Möglichkeit mit einer Turingmaschiene mit einem Band das Problem zu lösen ist es eine zweiseitige Turingmaschiene auf der einbandigen zu simulieren, wenn man annimmt, dass sich jede Mathematische Struktur über eine Turingmaschiene simulieren lässt.\\
+\textbf{2. } \textquote{\(\Leftarrow\)} \\
+Betrachten wir eine einseitige Turingmaschiene, dann existiert eine Turingmaschiene mit zweiseitigem Band, welche genau die gleichen Transitionsfunktionen besitzt. \\
+Es ist uns schließlich egal, wie viel \textquote{Platz} links von dem Ursprung ist, da wir nie diesen überschreiten werden. \\
+\\
+Somit sind beide Richtungen gezeigt. \qed
+\end{document}

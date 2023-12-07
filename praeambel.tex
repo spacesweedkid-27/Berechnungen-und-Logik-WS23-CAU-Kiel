@@ -13,6 +13,7 @@
 \usetikzlibrary{arrows, automata, positioning}
 
 \newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
+\newcommand*{\lqed}{\null\nobreak\hfill\ensuremath{\blacksquare}}
 \newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
 \newcommand*{\gedanke}{\textbf{-- }}
 \newcommand*{\gap}{\text{ }}
@@ -23,7 +24,7 @@
 % Hab länger gebraucht um zu realisieren, dass das ne gute Idee wäre
 \newcommand*{\R}{\mathbb R}
 
-\newenvironment{nolalign*}
+\newenvironment{noalign*}
  {\setlength{\abovedisplayskip}{0pt}\setlength{\belowdisplayskip}{0pt}%
   \csname flalign*\endcsname}
  {\csname endflalign*\endcsname\ignorespacesafterend}
