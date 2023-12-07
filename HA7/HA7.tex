@@ -52,6 +52,16 @@
 \subsection*{A1}
 \subsubsection*{a)}
 \subsection*{A2}
+\vor \(L_1, L_2\) sind Turing erkennbar, sodass \(L_1 \cup L_2\) und \(L_1 \cap L_2\) Turing entscheidbar. \\
+\beh \(L_1\) ist Turing entscheidbar. \\
+\bew Da \(L_1 \cup L_2\) und \(L_1 \cap L_2\) Turing entscheidbar sind existieren die Turingmaschienen \(M_\cap\) und \(M_\cup\), sodass \(M_\cap\) die Sprache \(L_1 \cap L_2\) akzeptiert oder sonst verwirft und \(\overline M_\cup\) die Sprache \(\overline{L_1 \cup L_2}\) akzeptiert oder sonst verwirft. \\
+Da \(L_1\) Turing erkennbar ist, existiert eine Turingmaschiene \(\overline M_1\), die genau \(\overline L_1\) akzeptiert. \\
+Nun definieren wir die Turingmaschiene \(M\) mit folgender Verhaltensweise für ein Wort \(w\):\\
+akzeptiert \(\overline M_\cup\) \(w\), dann verwerfe \(w\), \\
+sonst: akzeptiert \(M_\cap\) \(w\), dann akzeptiere \(w\), \\
+sonst: verwirft \(\overline M_1\) \(w\), dann verwerfe \(w\),
+sonst: akzeptiere \(w\). \\
+Dann ist \(M\) eine Turingmaschiene, die \(L_1\) entscheidet, somit ist \(L_1\) entscheidbar \qed
 \subsection*{A3}
 \beh Eine Turingmaschiene mit einem beidseitig unendlichem Band entscheidet genau die gleichen Sprachen, wie eine einseitig unendliche Turingmaschiene. \\
 \bew Wir teilen den Beweis in zwei Richtungen auf: \\
