@@ -154,4 +154,149 @@ Dann gilt Folgendes: \\
 Sei \(i := 0\), dann gilt: \(xy^izv = xzv = a^{m-1} \cdot a^{p-m} = a^{m-1+p-m} = a^{p-1} \not\in \overline{L_2}\), da nach Def. \(\mathbb P\) der Abstand von zwei Primzahlen größer als 2 sein muss, denn \(2 | (p\pm 1)\) gilt.\\
 Sei \(j := 0\), dann gilt: \(xy^jzv = xyzv = a^m \gap\gap \cdot a^{p-m} = a^{m+p-m} \gap\gap\gap = a^{p} \in \overline{L_2}\), nach \(\overline{L_2}\).\\
 Dann gilt: \(\exists i,j \in \mathbb{N}, v \in \{a\}^*: xy^izv \in \overline{L_2} \not\Leftrightarrow xy^jzv \in \overline{L_2}\). Damit ist \(\overline{L_2}\) nicht regulär, folglich ist auch \(L_2\) nicht regulär, \gedanke was zu zeigen war. \qed
+
+\subsection*{A3}
+\subsubsection*{a)}
+Im Folgenden definieren wir \(DTM_{Pal}\) als die deterministische Turing Maschine, welche die Sprache \(L = \{ww^R \in A^* \mid w \in A^*\}\)
+für ein Alphabet \(A = \{a,b\}\) entscheidet.\\
+Die Idee ist, dass immer der erste noch nicht gelesene Buchstabe auf dem Band mit dem 
+letzten noch nicht gelesenen Buchstaben auf dem Band vergleichen wird. Sind diese beiden 
+Buchstaben gleich, fährt die Turing Maschine mit dem nächsten Buchstaben-Paar fort. Es ist also 
+essentiell, dass es aus dem ersten Zustand \(q_0\) zwei Zustände \(q_1\) und \(q_2\) gibt, in 
+denen gespeichert wird, welches Symbol gelesen wird. In diesen Zuständen wird dann geblieben, bis 
+das Ende des Bandes erreicht wird (also ein \textvisiblespace gelesen wird). Dann entscheidet die 
+Turing Maschine, ob das am Ende des Bandes gelesene Zeichen gleich dem Zeichen am Anfang des Bandes 
+ist. Ist dem so, fährt der Kopf zurück an den Anfang des Bandes - es muss also jedes 
+Zeichen, welches Teil eines Vergleiches ist, durch ein \textvisiblespace ersetzt werden. 
+Jene Zeichen hingegen, welche nur gelesen werden, wenn der Kopf von einem Ende des Bandes zum 
+anderen fährt, werden nicht verändert. \\
+Ist nun ein Zeichen am Ende des Bandes nicht das gleiche, wie jenes, welches zum Vergleich am 
+Anfang des Bandes gelesen wurde, so wird der verwerfende Zustand \(q_{rej}\) erreicht. Es wird \(q_{rej}\) auch 
+erreicht, wenn nur ein zu vergleichendes Zeichen übrig ist, nicht aber ein zweites. In diesem 
+Fall ist die Anzahl der Buchstaben des Eingabewortes ungerade und gehört damit nicht zu \(L\). Liest die 
+Turing Maschine im Zustand \(q_0\) jedoch ein \textvisiblespace, dann ist das Eingabewort entweder 
+leer, oder das Eingabewort ein Palindrom gerader Länge und damit Teil der zu entscheidenen Sprache \(L\). 
+Dann wird der Zustand \(q_{acc}\) erreicht. \\
+Wir definieren nun die Maschine \(DTM_{Pal}\) formal und als Diagramm: \footnote[3]{Beim nochmaligen 
+Lesen der Aufgabenstellung stellen wir fest, dass lediglich ein Zustandsdiagramm von Nöten gewesen 
+wäre. Wir sehen die längere Ausführung und folgende Definition hier nun als Übung an, welche gleichzeitig auch 
+deutlich machen sollte, warum die Korrektheit unserer Konstruktion gilt, wenngleich nicht 
+explizit ein Nebensatz dahingehend formuliert wurde.}\\
+\(Q = \{q_0, q_1, q_2, q_3, q_4, q_5, q_{rej}, q_{acc}\}\) mit \(q_0\) als initialen Zustand, 
+\(q_{rej}\) als verwerfenden Zustand und \(q_{acc}\) als akzeptierenden Zustand.\\
+\(A = \{a,b\}\)\\
+\(\Gamma = \{a,b,\) \textvisiblespace\(\}\)\\
+\begin{tabular}{c c c c}
+    \(\delta\) & \((q, a)\) & \(\rightarrow\) & \((q, a, r)\)\\
+    \hline
+            &\((q_0, a)\)                       && \((q_1\), \textvisiblespace, \(R)\)\\
+            &\((q_0, b)\)                       && \((q_2\), \textvisiblespace, \(R)\)\\
+            &\((q_0\), \textvisiblespace\()\)   && \((q_{acc}\)\textvisiblespace, \(R)\)\\
+            &\((q_1, a)\)                       && \((q_1, a, R)\)\\
+            &\((q_1, b)\)                       && \((q_1, b, R)\)\\
+            &\((q_1\), \textvisiblespace \()\)  && \((q_3\), \textvisiblespace, \(L)\)\\
+            &\((q_2, a)\)                       && \((q_2, a, R)\)\\
+            &\((q_2, b)\)                       && \((q_2, b, R)\)\\
+            &\((q_2\), \textvisiblespace \()\)  && \((q_5\), \textvisiblespace, \(L)\)\\
+            &\((q_3, a)\)                       && \((q_4\), \textvisiblespace, \(L)\)\\
+            &\((q_3, b)\)                       && \((q_{rej}\), \textvisiblespace, \(L)\)\\
+            &\((q_3\), \textvisiblespace \()\)  && \((q_{rej}\), \textvisiblespace, \(L)\)\\
+            &\((q_4, a)\)                       && \((q_4, a, R)\)\\
+            &\((q_4, b)\)                       && \((q_4, b, R)\)\\
+            &\((q_4\), \textvisiblespace \()\)  && \((q_0\), \textvisiblespace, \(L)\)\\
+            &\((q_5, a)\)                       && \((q_{rej}\), \textvisiblespace, \(L)\)\\
+            &\((q_5, b)\)                       && \((q_4\), \textvisiblespace, \(L)\)\\
+            &\((q_5\), \textvisiblespace \()\)  && \((q_{rej}\), \textvisiblespace, \(L)\)\\
+\end{tabular}
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=3cm, semithick,  font=\small, align = center, sloped]
+    
+        \node[initial,state](0)[right=0cm]{\(q_0\)};
+        \node[state](1)[right=3cm]{\(q_1\)};
+        \node[state](2)[below of = 1]{\(q_2\)};
+        \node[state](3)[right=6cm]{\(q_3\)};
+        \node[state](4)[below of = 3]{\(q_4\)};
+        \node[state](5)[below of = 4]{\(q_5\)};
+        \node[state,accepting](rej)[right = 9cm]{rej};
+        \node[state,accepting](acc)[below of = 0]{acc};
+
+        \path   (0) edge [above] node {\(a \rightarrow\) \textvisiblespace, \(R\)} (1)
+                (0) edge [above] node {\(b \rightarrow\) \textvisiblespace, \(R\)} (2)
+                (0) edge [below] node {\textvisiblespace \(\rightarrow\) \textvisiblespace, \(R\)} (acc)
+                (1) edge [loop above] node {\(a \rightarrow a, R\)\\\(b \rightarrow b, R\)} (1)
+                (1) edge [above] node {\textvisiblespace \(\rightarrow\) \textvisiblespace, \(L\)} (3)
+                (2) edge [loop below] node {\(a \rightarrow a, R\)\\\(b \rightarrow b, R\)} (2)
+                (2) edge [above] node {\textvisiblespace \(\rightarrow\) \textvisiblespace, \(L\)} (5)
+                (3) edge [above] node {\textvisiblespace \(\rightarrow\)\textvisiblespace, \(L\)\\\(b \rightarrow\) \textvisiblespace, \(L\)} (rej)
+                (3) edge [above] node {\(a \rightarrow\) \textvisiblespace, \(L\)} (4)
+                (4) edge [loop right, above] node {\(a \rightarrow a, R\)\\\(b \rightarrow b, R\)} (4)
+                (4) edge [above] node {\textvisiblespace \(\rightarrow\) \textvisiblespace, \(L\)} (0)
+                (5) edge [below] node {\(b \rightarrow\) \textvisiblespace, \(L\)} (4)
+                (5) edge [below, bend right = 40] node {\(a \rightarrow\) \textvisiblespace, \(L\)\\\textvisiblespace \(\rightarrow\) \textvisiblespace, \(L\)} (rej);
+    \end{tikzpicture}
+\end{center}
+\subsubsection*{b)}
+Für das Wort \(abba\) erhalten wir mit \(DTM_{Pal}\) folgende Berechnung: \\
+1. \(q_0 b b a\) \textvisiblespace\\
+2. \textvisiblespace \(q_1 b a\) \textvisiblespace\\
+3. \textvisiblespace \(b q_1 a\) \textvisiblespace\\
+4. \textvisiblespace \(b b q_1\) \textvisiblespace\\
+5. \textvisiblespace \( b b a q_3\)\\
+6. \textvisiblespace \( b b q_4\) \textvisiblespace\\
+7. \textvisiblespace \(b q_4\) \textvisiblespace \textvisiblespace\\
+8. \textvisiblespace \(q_4 b\) \textvisiblespace \textvisiblespace\\
+9. \(q_0 b b\) \textvisiblespace \textvisiblespace\\
+10. \textvisiblespace \(q_2 b\) \textvisiblespace \textvisiblespace\\
+11. \textvisiblespace \textvisiblespace \(q_2\) \textvisiblespace \textvisiblespace\\
+12. \textvisiblespace \textvisiblespace \( b q_5\) \textvisiblespace\\
+13. \textvisiblespace \textvisiblespace \(q_4\) \textvisiblespace \textvisiblespace\\
+14. \textvisiblespace \(q_0\) \textvisiblespace \textvisiblespace \textvisiblespace\\
+15. \textvisiblespace \textvisiblespace \(q_{acc}\) \textvisiblespace \textvisiblespace\\
+\subsubsection*{c)}
+Für das Wort \(abbb\) erhalten wir mit \(DTM_{Pal}\) folgende Berechnung: \\
+1. \(q_0 b b b\) \textvisiblespace\\
+2. \textvisiblespace \(q_1 b b \) \textvisiblespace\\
+3. \textvisiblespace \(b q_1 b \) \textvisiblespace\\
+4. \textvisiblespace \(b b q_1 \) \textvisiblespace\\
+5. \textvisiblespace \(b b b q_3\)\\
+6. \textvisiblespace \(b b q_{rej}\) \textvisiblespace\\
+
+\subsection*{A4}
+\subsubsection*{a)}
+Diese Aussage ist korrekt. Es lässt sich für jede Sprache ein DEA konstruieren, von 
+dessen Startzustand aus für alle Eingaben ein weiterer Zustand \({q_1}_M\) existiert, 
+welcher bei Bedarf eingehende Transitionen besitzt. 
+
+\subsubsection*{b)}
+Diese Aussage ist inkorrekt. Es kann für Wörter beliebig langer Länge kein DEA konzipiert 
+werden, dessen akzeptierenden Zustände keine ausgehenden Transitionen akzeptiert. \\
+Betrachte beispielsweise einen Automaten \(M\), welcher alle Wörter einer Sprache \(A=\{a,b\}\) 
+erkennt, welche mit dem Buchstaben \(a\) beginnen. Dieser lässt sich für beliebig lange Wörter 
+nur mit einer ausgehenden Transition für den akzeptierenden Zustand konstruieren.
+\begin{center}
+    \begin{tikzpicture}[->, >=stealth', node distance=2cm, semithick,  font=\small, align = center, sloped]
+    
+        \node[initial,state](0)[right=0cm]{\(q_0\)};
+        \node[state](2)[below of = 0]{\(q_2\)};
+        \node[state,accepting](1)[right=2cm]{\(q_1\)};
+
+        \path   (0) edge [above] node {a} (1)
+                (0) edge [above] node {b} (2)
+                (2) edge [loop below] node {a,b} (2)
+                (1) edge [loop above] node {a,b} (1);
+    
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection*{c)}
+Diese Aussage ist inkorrekt. Betrachte dafür wieder den Automaten aus Aufgabenteil b. 
+Es ist bei diesem notwendig, für das erste Eingabesymbol eine Trennung durch Zustände 
+vorzunehmen. In diesem Fall sind beide vom Startzustand erreichbaren Zustände nur durch 
+unterschiedliche Eingabesymbole \(a \in A\) erreichbar. 
+
+\subsubsection*{d)}
+Diese Aussage ist nach Ausschlussprinzip korrekt. Darüber hinaus gilt per Definition, dass 
+bei einem DEA für jeden Zustand Transitionen für alle Eingabesymbole definiert sind. Das führt 
+zu der Erkenntnis, dass für jede durch einen DEA erkennbare Sprache ein oder mehrere 
+"Auffangzustände" definiert werden können, welche dieser Eigenschaft entsprechen. 
 \end{document}
