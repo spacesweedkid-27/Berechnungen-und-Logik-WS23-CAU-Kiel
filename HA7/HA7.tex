@@ -52,16 +52,15 @@
 \subsection*{A1}
 \subsubsection*{a)}
 \subsection*{A2}
-\vor \(L_1, L_2\) sind Turing erkennbar, sodass \(L_1 \cup L_2\) und \(L_1 \cap L_2\) Turing entscheidbar. \\
+\vor \(L_1, L_2\) Turing erkennbar, sodass \(L_1 \cup L_2\) und \(L_1 \cap L_2\) Turing entscheidbar sind. Sei \(\alpha \in L_1\) \\
 \beh \(L_1\) ist Turing entscheidbar. \\
-\bew Da \(L_1 \cup L_2\) und \(L_1 \cap L_2\) Turing entscheidbar sind existieren die Turingmaschinen \(M_\cap\) und \(M_\cup\), sodass \(M_\cap\) die Sprache \(L_1 \cap L_2\) akzeptiert oder sonst verwirft und \(\overline M_\cup\) die Sprache \(\overline{L_1 \cup L_2}\) akzeptiert oder sonst verwirft. \\
-Da \(L_1\) Turing erkennbar ist, existiert eine Turingmaschine \(\overline M_1\), die genau \(\overline L_1\) akzeptiert. \\
-Nun definieren wir die Turingmaschine \(M\) mit folgender Verhaltensweise für ein Wort \(w\):\\
-akzeptiert \(\overline M_\cup\) \(w\), dann verwerfe \(w\), \\
-sonst: akzeptiert \(M_\cap\) \(w\), dann akzeptiere \(w\), \\
-sonst: verwirft \(\overline M_1\) \(w\), dann verwerfe \(w\),
-sonst: akzeptiere \(w\). \\
-Dann ist \(M\) eine Turingmaschine, die \(L_1\) entscheidet, somit ist \(L_1\) entscheidbar \qed
+\bew Sei \(f : A^* \rightarrow A^*\) mit \(f(\overline{L_1 \cup L_2}) = \overline{L_1 \cup L_2}\) und \(f(L_1 \cup L_2) = \{\alpha\}\). \\
+Dann existiert eine Turingmaschine, die sich wie folgt verhält, für \(w \in A^*\) Eingabewort: \\
+Ist \(w \in \overline{L_1 \cup L_2}\), dann tue nichts und akzeptiere.\footnote[1]{Sei hier zu beachten, dass \(\overline{L_1 \cup L_2}\) entscheidbar ist.} \\
+Sonst leere die Eingabe und schreibe \(\alpha\) hin und akzeptiere. \\
+Dann gilt für alle Eingaben \(w \in A^*\). Berechne \(w\), dann ist die akzeptierende Konfiguration \(f(w)\). Dies gilt nach den eben beschriebenen Definitionen. \\
+Des Weiteren gilt: \(\forall w \in A^*: w \in L_1 \Leftrightarrow f(w) \in L_1 \cup L_2\) nach Definition \(f\). \\ Somit gilt also \(L_1 \le (L_1 \cup L_2)\). Beobachte, dass \(L_1 \cup L_2\) Turing entscheidbar ist.
+Dann gilt nach Satz \textquote{Eigenschaften der Reduktion 1}, dass \(L_1\) Turing entscheidbar ist, \gedanke was zu zeigen war. \qed
 \subsection*{A3}
 \beh Eine Turingmaschine mit einem beidseitig unendlichem Band entscheidet genau die gleichen Sprachen, wie eine einseitig unendliche Turingmaschine. \\
 \bew Wir teilen den Beweis in zwei Richtungen auf: \\
@@ -71,7 +70,7 @@ Betrachten wir eine beidseitige Turingmaschine. \\
 Dann existiert folgende beidbandige Turingmaschine: Wir nennen Band 1 \textquote{rechtes Band} und Band 2 \textquote{linkes Band}. Für jegliches beschriftetes Band, dass verwendet wird, werden das linke Band und das rechte Band so aufgeteilt, dass das linke Band die gespiegelte linke Hälfte des originalen Bandes ist und das rechte Band die rechte Hälfte des originalen Bandes ist. Die Mitte ist dabei der Start des rechten Bandes.\\
 Transformiere nun beide Bänder nochmal, so, dass ein Buchstabe, der nicht im Bandalphabet rechts bzw. links vom linken bzw. rechtem Band angefügt wird. Dieser Buchstabe repräsentiert die Mitte des originalen Bandes. \\
 Nun adjustieren wir die Transitionsfunktion so, dass folgendes gilt:\\
-Starte auf dem zweiten Buchstaben des rechten Bandes\footnote[1]{wir betrachten hier eine zweibandige Turingmaschiene, wessen Bänder nicht synchronisiert sind, also wo wir nicht sozusagen Tupel betrachten, dass diese Turingmaschinen mit den synchronen k-bandigen äquivalent sind in der Stärke, ließe sich leicht zeigen, aber wir werden nicht uns nicht darauf fokussieren in diesem Beweis, um ihn nicht unnötig in die Länge zu ziehen, \gedanke wie sonst.}.\\
+Starte auf dem zweiten Buchstaben des rechten Bandes\footnote[1]{wir betrachten hier eine zweibandige Turingmaschine, wessen Bänder nicht synchronisiert sind, also wo wir nicht sozusagen Tupel betrachten, dass diese Turingmaschinen mit den synchronen k-bandigen äquivalent sind in der Stärke, ließe sich leicht zeigen, aber wir werden nicht uns nicht darauf fokussieren in diesem Beweis, um ihn nicht unnötig in die Länge zu ziehen, \gedanke wie sonst.}.\\
 Wir rechnen so lange genau so, wie in der ursprünglichen Turingmaschine, bis wir (falls überhaupt) die Markierung erreichen. \\
 Dann rechne mit invertierten Bewegungsaktionen bei der zweiten Stelle des linken Bandes weiter (also nicht auf der Markierung, sonst würden wir ja wieder zurückspringen).\\
 Wenn wieder die Markierung erreicht wird, fahre wieder im \textquote{originalen} Modus rechts weiter auf der zweiten Stelle. \\
