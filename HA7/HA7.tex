@@ -50,7 +50,6 @@
 \onehalfspacing
 \vspace*{-2cm}
 \subsection*{A1}
-\subsubsection*{a)}
 \subsection*{A2}
 \vor \(L_1, L_2\) Turing erkennbar, sodass \(L_1 \cup L_2\) und \(L_1 \cap L_2\) Turing entscheidbar sind. Sei \(\alpha \in L_1\) \\
 \beh \(L_1\) ist Turing entscheidbar. \\
@@ -81,4 +80,12 @@ Betrachten wir eine einseitige Turingmaschine, dann existiert eine Turingmaschin
 Es ist uns schließlich egal, wie viel \textquote{Platz} links von dem Ursprung ist, da wir nie diesen überschreiten werden. \\
 \\
 Somit sind beide Richtungen gezeigt. \qed
+\subsection*{A3}
+\subsubsection*{a)}
+\subsubsection*{b)}
+\subsubsection*{c)}
+Die Reduktion funktioniert nicht, da angenommen ist, dass \(M_{<M>}\) wirklich TM ist. \\
+Jedoch ist \(M_{<M>}\) abhängig von der Turingmaschine, die das Halteproblem entscheidet, welche nicht existiert. \\
+Somit existiert also auch \(M_{<M>}\) nicht als TM und die Reduktionsfunktion \(f\) ist ungültig. \\
+Man sieht dies auch an einem anderen Punkt unserer Definition: \(M_{<M>}\) müsse nach unserer Definition immer halten, tut es aber nicht.
 \end{document}
