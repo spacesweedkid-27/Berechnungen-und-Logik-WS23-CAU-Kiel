@@ -82,6 +82,14 @@ Es ist uns schließlich egal, wie viel \textquote{Platz} links von dem Ursprung 
 Somit sind beide Richtungen gezeigt. \qed
 \subsection*{A4}
 \subsubsection*{a)}
+Um die Nicht-Gültigkeit dieser Reduktionsfunktion zu zeigen, bedienen wir uns einem der Sätze, 
+der in der verlinkten Ressource in Aufgabe 3 genannt wird: \\
+Ist \(L_2\) Turing-Entscheidbar, und gilt \(L_1 \leq L_2\), so ist auch \(L_1\) Turing-Entscheidbar. \\
+Wir definieren \(L_2 = L\) und \(L_1 = HALT_{TM}^{\epsilon}\).\\
+\(L\) ist offensichtlich entscheidbar, eine TM, welche diese Sprache entscheidet, ließe sich 
+im Handumdrehen konstruieren. Wir wissen aber aus der genannten Ressource auch, dass 
+\(HALT_{TM}^{\epsilon}\) nicht entscheidbar ist. Es kann also \(HALT_{TM}^{\epsilon} \leq L\) 
+nicht gelten.
 \subsubsection*{b)}
 \subsubsection*{c)}
 Die Reduktion funktioniert nicht, da angenommen ist, dass \(M_{<M>}\) wirklich TM ist. \\
