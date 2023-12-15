@@ -25,6 +25,8 @@
 \newcommand*{\R}{\mathbb R}
 
 \newcommand{\HALT}{\text{HALT}_\text{TM}^\epsilon}
+\newcommand{\STOPe}{\text{NONSTOP}_\text{TM}^\epsilon}
+\newcommand{\STOP}{\text{NONSTOP}_\text{TM}}
 
 \newenvironment{noalign*}
  {\setlength{\abovedisplayskip}{0pt}\setlength{\belowdisplayskip}{0pt}%
@@ -49,14 +51,29 @@
 \begin{document}
 \maketitle
 
-\doublespacing
+\onehalfspacing
 \vspace*{-2cm}
 \subsection*{A1}
 \vor \(L := \{\langle M \rangle \in \{0,1\}^* | \forall w : w \in L(M) \Leftrightarrow w = w^R\}\) \\
 \beh \(L\) ist unentscheidbar. \\
-\bew Sei \(f : \{0,1\}^* \rightarrow \{0,1\}^*, M \mapsto M \circ l\), wobei \(l \in L\) und \(\circ\) so, dass erst \(M\) berechnet wird und dann \(l\) berechnet wird.\\
+\bew Sei \(f : \{0,1\}^* \rightarrow \{0,1\}^*, \langle M \rangle \mapsto \langle M \circ l \rangle\), wobei \(l \in L\) und \(\circ\) so, dass erst \(M\) berechnet wird und dann \(l\) berechnet wird.\\
 \(M \circ l \in L\) gilt also genau dann, wenn \(M\) und \(l\) in einem akzeptierenden Zustand enden. \\
 Dann gilt: \(w \in \HALT \Rightarrow f(w) \in L\) und \(w \not\in \HALT \Rightarrow f(w) \not\in L\).\footnote[1]{Wir haben hier die Äquivalenz aufgeteilt und die Zweite, also die \textquote{Rückrichtung} mittels Kontraposition gezeigt.} \\
 Somit sind beide Richtungen gezeigt damit \(f\) Reduktionsfunktion für die Reduktion \(\HALT \le L\) ist. \\
 Nach Satz \textquote{Eigenschaften der Reduktion} ist somit \(L\) nicht entscheidbar. \qed
+\subsection*{A2}
+\subsubsection*{a)}
+Es gilt: \(\overline{\STOPe} = \HALT\). Wir zeigen also, dass \(\HALT\) erkennbar ist. \\
+Folgende Turingmaschine erkennt \(\HALT\):\\
+\(M : \{0,1\}^* \rightarrow \mathbb B, \langle w \rangle \mapsto \begin{cases}
+    \text{wahr} & \text{hält } w \text{?} \\
+    \text{falsch} & \text{sonst}
+\end{cases}\) \\
+Diese TM erkennt dann also alle haltenden Turingmaschinen, hält sie nicht interessiert uns das nicht, da wir nur zeigen wollten, dass \(\STOPe\) co-erkennbar ist. \qed \pagebreak
+\subsubsection*{b)}
+Definiere die TM \(H\) so, dass \(H\) für jede Eingabe hält, außer der leeren Eingabe, also \(\epsilon\). Sei \(f : \{0,1\}^* \rightarrow \{0,1\}^*, \langle w \rangle \mapsto \langle w \circ H \rangle\) so, dass \(w \circ H\) erst \(w\) simuliert und dann \(H\) simuliert für die gleiche Eingabe. \\
+Dann gilt folgendes: \\
+Ist \(\langle w\rangle \in \STOPe\), dann hält \(w \circ H\), also \(f(w)\) \textquote{decodiert} für keine Eingabe, also es gilt \(f(w) = \langle w \circ H \rangle \in \STOP\). \\
+Ist \(\langle w\rangle \not\in \STOPe\), dann existiert ein Eingabewort, sodass \(w\) hält und damit dann auch \(w \circ H\), also gilt dann \(f(w) = \langle w \circ H \rangle \not\in \STOP\). \\
+Somit eignet sich \(f\) als Reduktionsfunktion für die zu zeigende Reduktion \(\STOPe \le \STOP\). \qed
 \end{document}
