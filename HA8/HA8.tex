@@ -10,6 +10,7 @@
 \usepackage{csquotes} % for \textquote{}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{stmaryrd}
 \usetikzlibrary{arrows, automata, positioning}
 
 \newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
@@ -27,6 +28,8 @@
 \newcommand{\HALT}{\text{HALT}_\text{TM}^\epsilon}
 \newcommand{\STOPe}{\text{NONSTOP}_\text{TM}^\epsilon}
 \newcommand{\STOP}{\text{NONSTOP}_\text{TM}}
+\newcommand{\lb}{\llbracket}
+\newcommand{\rb}{\rrbracket}
 
 \newenvironment{noalign*}
  {\setlength{\abovedisplayskip}{0pt}\setlength{\belowdisplayskip}{0pt}%
@@ -76,4 +79,51 @@ Dann gilt folgendes: \\
 Ist \(\langle w\rangle \in \STOPe\), dann hält \(w \circ H\), also \(f(w)\) \textquote{decodiert} für keine Eingabe, also es gilt \(f(w) = \langle w \circ H \rangle \in \STOP\). \\
 Ist \(\langle w\rangle \not\in \STOPe\), dann existiert ein Eingabewort, sodass \(w\) hält und damit dann auch \(w \circ H\), also gilt dann \(f(w) = \langle w \circ H \rangle \not\in \STOP\). \\
 Somit eignet sich \(f\) als Reduktionsfunktion für die zu zeigende Reduktion \(\STOPe \le \STOP\). \qed
+
+\subsection*{A4}
+Es gilt \(\varphi_1, \varphi_3 \notin F_{AL}\) und \(\varphi_2, \varphi_4 \in F_{AL}\).\\
+Eine für \(\varphi_2\) gültige Belegung \(\beta_1\) ist \(\llbracket \varphi_2 \rrbracket_{\beta_1} = 1\).\\
+Eine für \(\varphi_4\) gültige Belegung \(\beta_2\) ist \(\llbracket \varphi_4 \rrbracket_{\beta_2} = 0\).
+
+\subsection*{A5}
+\subsubsection*{a)}
+\begin{flalign*}
+    \lb \varphi_1 \rb_{\beta}   & = (\lb \lnot X_0 \rb_{\beta} \wedge \lb Y_0 \rb_{\beta}) \vee ((\lb X_0 \rb_{\beta} \leftrightarrow \lb Y_0 \rb_{\beta}) \wedge \varphi_0) & \text{Definition Semantik}\\
+                                & = (\lnot 0 \wedge 0) \vee ((0 \leftrightarrow 0) \wedge \top) & \beta, \varphi_0 = \top, \text{Basiselement} \\
+                                & = (1 \wedge 0) \vee (1 \wedge \top) & \text{Auswertung Junktoren} \\
+                                & = 0 \vee \top & \text{Auswertung } \vee \\
+                                & = \top & \\
+    \lb \varphi_2 \rb_{\beta}   & = (\lb \lnot X_1 \rb_{\beta} \wedge \lb Y_1 \rb_{\beta}) \vee (( \lb X_1 \rb_{\beta} \leftrightarrow \lb Y_1 \rb_{\beta}) \wedge \varphi_1) & \text{Definition Semantik} \\
+                                & = (\lnot 0 \wedge 1) \vee ((0 \leftrightarrow 1) \wedge \top) & \text{Auswertung } \lnot, \leftrightarrow, \varphi_1=\top\\
+                                & = (1 \wedge 1) \vee (0 \wedge \top) & \text{Auswertung } \wedge\\
+                                & = 1 \vee 0 & \text{Auswertung } \vee\\
+                                & = 1 = \top\\
+    \lb \varphi_3 \rb_{\beta}   & = (\lb \lnot X_2 \rb_{\beta}) \wedge \lb Y_2 \rb_{\beta} \vee (( \lb X_2 \rb_{\beta} \leftrightarrow \lb Y_2 \rb_{\beta}) \wedge \varphi_2) & \text{Definition Semantik} \\
+                                & = (\lnot 1 \wedge 0 ) \vee (( 1 \leftrightarrow 0) \wedge \top) & \text{Auswertung } \lnot, \leftrightarrow, \varphi_2 = \top\\
+                                & = (0 \wedge 0) \vee ( 0 \wedge \top) & \text{Auswertung } \wedge \\
+                                & = 0 \vee 0 & \text{Auswertung } \vee\\
+                                & = 0 = \bot = \lb \varphi_3 \rb_{\beta} & \\
+\end{flalign*}
+\subsubsection*{b)}
+Betrachte: \\
+\textbf{(1)} \puffer \(\bigwedge_{i=0}^{n-1} (X_i \leftrightarrow Y_i)\)\\
+\textbf{(2)} \puffer \(\bigvee_{i=0}^{n-1} ( \lnot X_i \wedge Y_1 \wedge\) \textbf{(3)})\\
+\textbf{(3)} \puffer \(\bigvee_{j=i+1}^{n-1}(X_j \leftrightarrow Y_j))\)\\
+\textbf{(1)} stellt sicher, dass die Bits von \(X\) und \(Y\) an der Stelle \(i\) gleich sind.
+Kommt \textbf{(3)} zur Anwendung, dann sind \(X\) und \(Y\) an Stelle \(j\) immer gleich, während 
+in \textbf{(2)} die große Disjunktion dafür sorgt, dass die Bits \(\lnot X_i\) und \(Y_i\) nicht beide zu 0 
+ausgewertet werden und dass alle nachfolgenden Bits gleich sind.\\
+Alle Teile der Relation sorgen also für einen Vergleich der beiden Binärzahlen \(X\) und \(Y\): Entweder 
+alle Bits an Stelle \(i\) sind gleich \textbf{oder} es gibt eine Stelle \(i\), an der \(\lb X_1 \rb = 0\) und 
+\(\lb Y_1 \rb = 1\) und an allen weiteren Positionen \(j\) sind die Bits gleich. \\
+Zusammengefasst bedeutet dies: Entweder die durch \(X_n\) und \(Y_n\) repräsentierten Binärzahlen sind gleich, 
+oder unterscheiden sich nur bis zu einer bestimmten Stelle \(i\) und alle nachfolgenden Bits sind gleich.\\
+
+\subsection*{A6}
+Die Menge aller aussagenlogischen Variablen, die in \(\varphi \in F_{AL}\) vorkommen, \(vars(\varphi) : 
+F_{AL} \rightarrow \mathcal{P}(V_{AL})\), definieren wir induktiv wie folgt: \\
+\textbf{IA:} \puffer Sei \(\varphi_0 \in F_{AL}\). Dann definieren wir \(vars(\varphi_0) := \{\varphi_0\}\).\\
+\textbf{IS:} \puffer Sind \(\varphi_0, \dots, \varphi_n \in V_{AL}\) mit \(n \in \mathbb{N}_0\) durch 
+beliebigen n-stelligen Junktor \(C\) verbunden, sodass \(C(\varphi_0, \dots, \varphi_n) \in F_{AL}\) gilt, 
+dann definieren wir \(vars(C(\varphi_0, \dots, \varphi_n)) := \{\varphi_0, \dots, \varphi_n\}\).
 \end{document}
