@@ -1,0 +1,82 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[ngerman]{babel} 
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts} 
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titling}
+\usepackage{csquotes} % for \textquote{}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{stmaryrd} % \llbracket and \rrbracket
+\usetikzlibrary{arrows, automata, positioning}
+
+\newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
+\newcommand*{\lqed}{\null\nobreak\hfill\ensuremath{\blacksquare}}
+\newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
+\newcommand*{\gedanke}{\textbf{-- }}
+\newcommand*{\gap}{\text{ }}
+\newcommand*{\setDef}{\gap|\gap}
+\newcommand*{\vor}{\textbf{Vor.:} \gap}
+\newcommand*{\beh}{\textbf{Beh.:} \gap}
+\newcommand*{\bew}{\textbf{Bew.:} \gap}
+% Hab länger gebraucht um zu realisieren, dass das ne gute Idee wäre
+\newcommand*{\R}{\mathbb R}
+% Das hier wird sehr nett werden
+\newcommand*{\vDashR}{\mathrel{\reflectbox{\(\vDash\)}}}
+\newcommand*{\LeftrightvDash}{\vDash\vDashR}
+
+\newenvironment{noalign*}
+ {\setlength{\abovedisplayskip}{0pt}\setlength{\belowdisplayskip}{0pt}%
+  \csname flalign*\endcsname}
+ {\csname endflalign*\endcsname\ignorespacesafterend}
+
+
+
+\pagestyle{plain}
+\allowdisplaybreaks
+
+\setlength{\droptitle}{-11em}
+\setlength{\jot}{12pt}
+%\setlength{\hoffset}{-1in}     Wenn nötig
+%\setlength{\textwidth}{535pt}  Wenn nötig
+
+\title{Berechnungen und Logik\\Hausaufgabenserie 9}
+\author{Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
+\date{}
+
+
+\begin{document}
+\maketitle
+
+\doublespacing
+\vspace*{-2cm}
+\subsection*{A1}
+\vor Sei \(\beta\) beliebige Belegung für die Formeln \(\varphi, \psi \in F_{AL}\). \\
+\beh \(\neg(\varphi \vee \psi) \LeftrightvDash \neg\varphi \wedge \neg\psi\) \\
+\bew\\
+Fall 1.: \((\llbracket \varphi \rrbracket_\beta, \llbracket \psi \rrbracket_\beta) = (0,0)\). \\
+Es gilt:
+\begin{noalign*}
+    & \llbracket \neg(\varphi \vee \psi) \rrbracket_\beta = f_\neg(\llbracket \varphi \vee \psi \rrbracket_\beta) = f_\neg(f_\vee(\llbracket \varphi \rrbracket_\beta, \llbracket \psi \rrbracket_\beta)) = f_\neg(f_\vee(0,0)) \\
+    = & f_\neg(0) = 1 = f_\wedge(1,1) = f_\wedge(f_\neg(0), f_\neg(0)) = f_\wedge(f_\neg(\llbracket \varphi \rrbracket_\beta), f_\neg(\llbracket \psi \rrbracket_\beta)) \\
+    = & f_\wedge(\llbracket \varphi \rrbracket_\beta, \llbracket \psi \rrbracket_\beta) = \llbracket\neg\varphi \wedge \neg\psi\rrbracket_\beta
+\end{noalign*}
+Andere Fälle analog oder mittels Tabelle. \qed \pagebreak
+\subsection*{A2}
+\vor \(n \in \mathbb N_0, \varphi_0, \dots \varphi_{n-1}\) Formeln. \\
+\beh \(\neg\bigwedge_{i=0}^{n-1}\varphi_i \LeftrightvDash \bigvee_{i=0}^{n-1}\neg\varphi_i\) \\
+\bew Wir zeigen mittels Induktion: \\
+\textbf{(IB):} Es gilt: \(\neg(\wedge(\top)) \LeftrightvDash \neg(\top) \LeftrightvDash \bot \LeftrightvDash \vee(\bot) \LeftrightvDash \vee(\neg(\top))\)\footnote[1]{Hmm, ich wünschte, der Text wäre ein bisschen fetter\dots} \\
+Anderer Fall analog. \\
+\textbf{(IS):} Sei angenommen \textbf{(IH)} \(\neg\bigwedge_{i=0}^{n-2}\varphi_i \LeftrightvDash \bigvee_{i=0}^{n-2}\neg\varphi_i\).\\
+Zu zeigen ist dann: \(\neg\bigwedge_{i=0}^{n-1}\varphi_i \LeftrightvDash \bigvee_{i=0}^{n-1}\neg\varphi_i\). \\
+Es gilt: \begin{noalign*}
+    \neg\bigwedge_{i=0}^{n-1}\varphi_i & \LeftrightvDash \neg\left(\bigwedge_{i=0}^{n-2}\varphi_i \wedge \varphi_{n-1}\right) & \text{| \textbf{(IB)} bzw. Bearbeitung von A1} \\
+    & \LeftrightvDash \neg\bigwedge_{i=0}^{n-2}\varphi_i \vee \neg\varphi_{n-1} & \text{| \textbf{(IH)}, Ersetzungslemma} \\
+    & \LeftrightvDash \bigvee_{i=0}^{n-2}\neg\varphi_i \vee \neg\varphi_{n-1} \LeftrightvDash \bigvee_{i=0}^{n-1}\neg\phi_i
+\end{noalign*} \\
+Somit sind Induktionsbasis und Induktionsschritt gezeigt. \qed
+\end{document}
