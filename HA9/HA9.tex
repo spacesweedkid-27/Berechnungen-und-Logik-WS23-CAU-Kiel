@@ -27,6 +27,9 @@
 % Das hier wird sehr nett werden
 \newcommand*{\vDashR}{\mathrel{\reflectbox{\(\vDash\)}}}
 \newcommand*{\LeftrightvDash}{\vDash\vDashR}
+\newcommand{\lb}{\llbracket}
+\newcommand{\rb}{\rrbracket}
+\newcommand{\rbb}{\rrbracket_{\beta}}
 
 \newenvironment{noalign*}
  {\setlength{\abovedisplayskip}{0pt}\setlength{\belowdisplayskip}{0pt}%
@@ -79,4 +82,47 @@ Es gilt: \begin{noalign*}
     & \LeftrightvDash \bigvee_{i=0}^{n-2}\neg\varphi_i \vee \neg\varphi_{n-1} \LeftrightvDash \bigvee_{i=0}^{n-1}\neg\phi_i
 \end{noalign*} \\
 Somit sind Induktionsbasis und Induktionsschritt gezeigt. \qed
+\pagebreak
+\subsection*{A4}
+\vor \(\Phi \subseteq F_{AL}\) und \(\varphi \in F_{AL}\). \(\Phi \cup \{\lnot \varphi\}\) unerfüllbar. \\
+\beh \(\Phi \vDash \varphi\) genau dann, wenn \(\Phi \cup \{\lnot \varphi\}\) unerfüllbar.\\
+\bew Wenn \(\Phi \cup \{\lnot \varphi\}\) unerfüllbar ist, gilt \(\lb \Phi \cup \{\lnot \varphi\}\rb_{\beta}=0\) wegen der 
+Definition von Erfüllbarkeit. Betrachte zwei Fälle:\\
+\textbf{(1)} \(\lb \Phi \rb_{\beta} = 1\).\\
+Damit \(\lb \Phi \cup \{\lnot \varphi\} \rb_{\beta} = 0\) gelten kann, muss \(\lb \lnot \varphi \rb_{\beta} = 1\) gelten. 
+Daraus folgt \(\lb \varphi \rb_{\beta} = 1\). Dann gilt \(\Phi \vDash \varphi\), da \(\lb \Phi \rb_{\beta} = 1\), also 
+\(\beta \vDash \Phi\), und \(\lb \varphi \rb_{\beta} = 1\), also \(\beta \vDash \varphi\). \\
+\textbf{(2)} \(\lb \Phi \rbb = 0\)\\
+Damit \(\lb \Phi \cup \{\lnot \varphi\} \rbb = 0\) gelten kann, muss \(\lb \varphi \rbb = 1\) gelten. Dann gilt auch 
+\(\lb \varphi \rbb = 0\). \\
+Dann wissen wir acuh, dass es keine passende Belegung \(\beta\) für \(\Phi\) und \(\varphi\) gibt, sodass \(\lb \Phi \rbb = 1\) 
+und \(\lb \varphi \rbb = 1\) gelten. Es gilt also auf Grund der Nicht-Existenz von passenden Belegungen \(\beta\): \\
+\(\Phi \vDash \varphi\).\\
+\qed
+
+\pagebreak
+
+\subsection*{A6}
+\subsubsection*{a)}
+\begin{flalign*}
+    & (\lnot X_0 \vee X_4) \wedge \lnot (X_1    \wedge (X_3 \vee \lnot X_2)) & \text{Distributivität}\\
+    \LeftrightvDash \puffer & (\lnot X_0 \vee X_4)      \wedge \lnot ((X_1 \wedge X_3) \vee (X_1 \wedge \lnot X_2)) & \text{De Morgan}\\
+    \LeftrightvDash \puffer & (\lnot X_0 \vee X_4)      \wedge \lnot (X_1 \wedge X_3) \wedge \lnot (X_1 \wedge \lnot X_2) & \text{De Morgan}\\
+    \LeftrightvDash \puffer & (\lnot X_0 \vee X_4)      \wedge (\lnot X_1 \vee \lnot X_3) \wedge (\lnot X_1 \vee \lnot \lnot X_2) & \text{Doppelnegation} \\
+    \LeftrightvDash \puffer & (\lnot X_0 \vee X_4)      \wedge (\lnot X_1 \vee \lnot X_3) \wedge (\lnot X_1 \vee X_2)
+\end{flalign*}
+Wir erhalten \(\varphi \bigwedge \bigvee = \{\{\lnot X_0, X_4\}, \{\lnot X_1, \lnot X_3\}, \{\lnot X_1, X_2\}\}\).
+\subsubsection*{b)}
+\begin{flalign*}
+    & (\lnot X_0 \vee X_4) \wedge \lnot (X_1 \wedge (X_3 \vee \lnot X_2)) & \text{DeMorgan}\\
+    \LeftrightvDash \puffer & (\lnot X_0 \vee X_4) \wedge \lnot X_1 \vee \lnot (X_3 \vee \lnot X_2) & \text{Kommutativität} \\
+    \LeftrightvDash \puffer & \lnot X_1 \wedge (\lnot X_0 \vee X_4) \vee \lnot (X_3 \vee \lnot X_2) & \text{Distributivität} \\
+    \LeftrightvDash \puffer & (\lnot X_1 \wedge \lnot X_0) \vee (\lnot X_1 \wedge X_4) \vee \lnot (X_3 \vee \lnot X_2) & \text{De Morgan}\\
+    \LeftrightvDash \puffer & (\lnot X_1 \wedge \lnot X_0) \vee (\lnot X_1 \wedge X_4) \vee (\lnot X_3 \wedge \lnot \lnot X_2) & \text{Doppelnegation} \\
+    \LeftrightvDash \puffer & (\lnot X_1 \wedge \lnot X_0) \vee (\lnot X_1 \wedge X_4) \vee (\lnot X_3 \wedge X_2)
+\end{flalign*}
+Wir erhalten \(\varphi \bigvee \bigwedge = \{\{\lnot X_1, \lnot X_0\}, \{\lnot X_1, X_4\}, \{\lnot X_3, X_2\}\}\).
+
+\subsection*{A7}
+
 \end{document}
