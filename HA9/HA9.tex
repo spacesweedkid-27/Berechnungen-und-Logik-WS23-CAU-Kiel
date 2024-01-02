@@ -124,5 +124,26 @@ Wir erhalten \(\varphi \bigwedge \bigvee = \{\{\lnot X_0, X_4\}, \{\lnot X_1, \l
 Wir erhalten \(\varphi \bigvee \bigwedge = \{\{\lnot X_1, \lnot X_0\}, \{\lnot X_1, X_4\}, \{\lnot X_3, X_2\}\}\).
 
 \subsection*{A7}
-
+Definiere \(\varphi := \bigwedge \bigvee \{\{X_2,X_1,X_5\}, \{\lnot X_4, X_2, \lnot X_3\}, \{\lnot X_1\}, \{X_4,X_5,\lnot X_2\},\)\\
+\(\{\lnot X_4,X_1\}, \{X_2, \lnot X_5, \lnot X_3\}, \{X_3, X_1\}, \{\lnot X_5, \lnot X_2\}\}\)\\
+Wir zeigen \(\varphi \vDash \bot\) mittels Resolutionsbeweis.
+\begin{flalign*}
+    \textbf{1.} \puffer     & \{\lnot X_1\}                 & \text{Voraussetzung}\\
+    \textbf{2.} \puffer     & \{X_3, X_1\}                  & \text{Voraussetzung}\\
+    \textbf{3.} \puffer     & \{X_3\}                       & \text{Resolution mit \(X_1\) aus 1 und 2}\\
+    \textbf{4.} \puffer     & \{X_2, \lnot X_5, \lnot X_3\} & \text{Voraussetzung}\\
+    \textbf{5.} \puffer     & \{X_2, \lnot X_5\}            & \text{Resolution mit \(X_3\) aus 3 und 4}\\
+    \textbf{6.} \puffer     & \{\lnot X_5, \lnot X_2\}      & \text{Voraussetzung}\\
+    \textbf{7.} \puffer     & \{\lnot X_5\}                 & \text{Resolution mit \(X_2\) aus 5 und 6}\\
+    \textbf{8.} \puffer     & \{X_2, X_1, X_5\}             & \text{Voraussetzung}\\
+    \textbf{9.} \puffer     & \{X_2, X_1\}                  & \text{Resolution mit \(X_5\) aus 7 und 8}\\
+    \textbf{10.} \puffer    & \{X_2\}                       & \text{Resolution mit \(X_1\) aus 1 und 9}\\
+    \textbf{11.} \puffer    & \{X_4, X_5, \lnot X_2\}       & \text{Voraussetzung}\\
+    \textbf{12.} \puffer    & \{X_4, X_5\}                  & \text{Resolution mit \(X_2\) aus 10 und 11}\\
+    \textbf{13.} \puffer    & \{X_4\}                       & \text{Resolution mit \(X_5\) aus 7 und 12}\\
+    \textbf{14.} \puffer    & \{\lnot X_4, X_1\}            & \text{Voraussetzung}\\
+    \textbf{15.} \puffer    & \{X_1\}                       & \text{Resolution mit \(X_4\) aus 13 und 14}\\
+    \textbf{16.} \puffer    & \{\}                          & \text{Resolution mit \(X_1\) aus 1 und 15}
+\end{flalign*}
+Damit ist gezeigt, was zu zeigen war. \qed
 \end{document}
