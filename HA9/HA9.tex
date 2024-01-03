@@ -10,6 +10,7 @@
 \usepackage{csquotes} % for \textquote{}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{stix}
 \usepackage{stmaryrd} % \llbracket and \rrbracket
 \usetikzlibrary{arrows, automata, positioning}
 
@@ -46,8 +47,8 @@
 %\setlength{\hoffset}{-1in}     Wenn nötig
 %\setlength{\textwidth}{535pt}  Wenn nötig
 
-\title{Berechnungen und Logik\\Hausaufgabenserie 9}
-\author{Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
+\title{\scshape Berechnungen und Logik\\Hausaufgabenserie 9}
+\author{\scshape Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
 \date{}
 
 
@@ -67,12 +68,21 @@ Es gilt:
     = & f_\neg(0) = 1 = f_\wedge(1,1) = f_\wedge(f_\neg(0), f_\neg(0)) = f_\wedge(f_\neg(\llbracket \varphi \rrbracket_\beta), f_\neg(\llbracket \psi \rrbracket_\beta)) \\
     = & f_\wedge(\llbracket \varphi \rrbracket_\beta, \llbracket \psi \rrbracket_\beta) = \llbracket\neg\varphi \wedge \neg\psi\rrbracket_\beta
 \end{noalign*}
-Andere Fälle analog oder mittels Tabelle. \qed \pagebreak
+Fall \((\llbracket \varphi \rrbracket_\beta, \llbracket \psi \rrbracket_\beta) = (1,1)\) analog. \\
+Fall \((\llbracket \varphi \rrbracket_\beta, \llbracket \psi \rrbracket_\beta) = (0,1)\). \\
+Es gilt:
+\begin{noalign*}
+    & \llbracket \neg(\varphi \vee \psi) \rrbracket_\beta = f_\neg(\llbracket \varphi \vee \psi \rrbracket_\beta) = f_\neg(f_\vee(\llbracket \varphi \rrbracket_\beta, \llbracket \psi \rrbracket_\beta)) = f_\neg(f_\vee(0,1)) \\
+    = & f_\neg(1) = 0 = f_\wedge(1,0) = f_\wedge(f_\neg(0), f_\neg(1)) = f_\wedge(f_\neg(\llbracket \varphi \rrbracket_\beta), f_\neg(\llbracket \psi \rrbracket_\beta)) \\
+    = & f_\wedge(\llbracket \varphi \rrbracket_\beta, \llbracket \psi \rrbracket_\beta) = \llbracket\neg\varphi \wedge \neg\psi\rrbracket_\beta
+\end{noalign*}
+Fall \((\llbracket \varphi \rrbracket_\beta, \llbracket \psi \rrbracket_\beta) = (1,0)\) folgt aus Kommutativität \qed \\
+Analog folgt der Beweis auch durch Ablesen einer Tabelle wo jeweilige Ausdrücke ausgewertet werden für alle möglichen Belegungen.\pagebreak
 \subsection*{A2}
 \vor \(n \in \mathbb N_0, \varphi_0, \dots \varphi_{n-1}\) Formeln. \\
 \beh \(\neg\bigwedge_{i=0}^{n-1}\varphi_i \LeftrightvDash \bigvee_{i=0}^{n-1}\neg\varphi_i\) \\
 \bew Wir zeigen mittels Induktion: \\
-\textbf{(IB):} Es gilt: \(\neg(\wedge(\top)) \LeftrightvDash \neg(\top) \LeftrightvDash \bot \LeftrightvDash \vee(\bot) \LeftrightvDash \vee(\neg(\top))\)\footnote[1]{Hmm, ich wünschte, der Text wäre ein bisschen fetter\dots} \\
+\textbf{(IB):} Es gilt: \(\neg(\wedge(\top)) \LeftrightvDash \neg(\top) \LeftrightvDash \bot \LeftrightvDash \vee(\bot) \LeftrightvDash \vee(\neg(\top))\) \\
 Anderer Fall analog. \\
 \textbf{(IS):} Sei angenommen \textbf{(IH)} \(\neg\bigwedge_{i=0}^{n-2}\varphi_i \LeftrightvDash \bigvee_{i=0}^{n-2}\neg\varphi_i\).\\
 Zu zeigen ist dann: \(\neg\bigwedge_{i=0}^{n-1}\varphi_i \LeftrightvDash \bigvee_{i=0}^{n-1}\neg\varphi_i\). \\
