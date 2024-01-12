@@ -1,0 +1,87 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[ngerman]{babel} 
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts} 
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titling}
+\usepackage{csquotes} % for \textquote{}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{stix}
+\usepackage{stmaryrd} % \llbracket and \rrbracket
+\usetikzlibrary{arrows, automata, positioning}
+
+\newcommand*{\qed}{\null\nobreak\hfill\ensuremath{\square}}
+\newcommand*{\lqed}{\null\nobreak\hfill\ensuremath{\blacksquare}}
+\newcommand*{\puffer}{\text{ }\text{ }\text{ }\text{ }}
+\newcommand*{\gedanke}{\textbf{-- }}
+\newcommand*{\gap}{\text{ }}
+\newcommand*{\setDef}{\gap|\gap}
+\newcommand*{\vor}{\textbf{Vor.:} \gap}
+\newcommand*{\beh}{\textbf{Beh.:} \gap}
+\newcommand*{\bew}{\textbf{Bew.:} \gap}
+% Hab länger gebraucht um zu realisieren, dass das ne gute Idee wäre
+\newcommand*{\R}{\mathbb R}
+
+\newenvironment{noalign*}
+ {\setlength{\abovedisplayskip}{0pt}\setlength{\belowdisplayskip}{0pt}%
+  \csname flalign*\endcsname}
+ {\csname endflalign*\endcsname\ignorespacesafterend}
+
+
+
+\pagestyle{plain}
+\allowdisplaybreaks
+
+\setlength{\droptitle}{-11em}
+\setlength{\jot}{12pt}
+%\setlength{\hoffset}{-1in}     Wenn nötig
+%\setlength{\textwidth}{535pt}  Wenn nötig
+
+\title{Berechnungen und Logik\\Hausaufgabenserie 10}
+\author{Henri Heyden, Nike Pulow \\ \small stu240825, stu239549}
+\date{}
+
+
+\begin{document}
+\maketitle
+
+\doublespacing
+\vspace*{-2cm}
+\subsection*{HA 1}
+\subsubsection*{a)}
+\subsubsection*{b)}
+\subsection*{HA 2}
+\subsubsection*{a)}
+\(t_1\) ist \(\mathcal S\)-Term, hier werden alle Formalismen für die Signatur \(\mathcal S\) eingehalten. \\
+\(t_2\) ist nicht \(\mathcal S\)-Term, wir haben \(\doteq\) so definiert, dass links und rechts \(\mathcal S\)-Terme stehen, was auch stimmt, jedoch ergibt dieser entstehende Baum eine \(\mathcal S\)-Formel, kein \(\mathcal S\)-Term. \\
+\(t_3\) ist nicht \(\mathcal S\)-Term, wir schreiben Variablen hier klein und nicht groß, also ist \(X_0\) nicht Unter\(\mathcal S\)-term. \\
+\(t_4\) ist nicht \(\mathcal S\)-Term, da \(T\) Relation ist, Relationen dürfen nicht in \(\mathcal S\)-Termen vorkommen.
+\subsubsection*{b)}
+\(\varphi_1\) ist nicht \(\mathcal S\)-Formel, da \(T(c)\) Formel ist und nicht \(\mathcal S\)-Term. \\
+\(\varphi_2\) ist nicht \(\mathcal S\)-Formel, da rechts von \textquote{\(\doteq\)} kein \(\mathcal S\)-Term steht. \\
+\(\varphi_3\) ist nicht \(\mathcal S\)-Formel, da die Variable \(x_0\) nicht \(\mathcal S\)-Formel ist. \\
+\(\varphi_4\) ist nicht \(\mathcal S\)-Formel, da links von dem Junktor \textquote{\(\wedge\)} ein \(\mathcal S\)-Term steht und nicht eine \(\mathcal S\)-Formel.
+\subsection*{HA 3}
+\subsubsection*{i = 0)}
+Definiere für die Struktur \(\mathcal A_0\) das Universum \(A_0 := \{\text{in}, \text{out}, 1, 2, 3\}\). \\
+Definiere \(E := \{(\text{in}, 2), (2, 3), (3, \text{out}), (3,1), (1,2)\}\). \\
+Dann gilt \(E \subseteq A_0^2\), des Weiteren hat jede Konstante aus \(\mathcal S\) ein Komplement in \(A_0\).\\
+Somit ist \(\mathcal A_0\) \(\mathcal S\)-Struktur und \(\mathcal A_0\) modelliert den Graph \(G_0\).
+\subsubsection*{i = 1)}
+Definiere für die Struktur \(\mathcal A_1\) das Universum \(A_1 := \{\text{in}, \text{out}, 1, 2, 3, 4, 5\}\). \\
+Definiere \(E := \{(\text{in}, 2), (2, 3), (3, 4), (4,2), (4,5), (5,4), (1,2), (1,5), (5, \text{out})\}\). \\
+Dann gilt \(E \subseteq A_1^2\), des Weiteren hat jede Konstante aus \(\mathcal S\) ein Komplement in \(A_1\).\\
+Somit ist \(\mathcal A_1\) \(\mathcal S\)-Struktur und \(\mathcal A_1\) modelliert den Graph \(G_1\).
+\subsubsection*{i = 2)}
+Definiere für die Struktur \(\mathcal A_2\) das Universum \(A_2 := \{\text{in}, \text{out}, \text{...}, 1, 2, 3\}\). \\
+Definiere \(E := \{(\text{in}, 1), (1, \text{out}), (1, 2), (2,3), (3, \text{...}), (1,1), (2,2), (3,3)\}\). \\
+Dann gilt \(E \subseteq A_2^2\), des Weiteren hat jede Konstante aus \(\mathcal S\) ein Komplement in \(A_2\).\\
+Somit ist \(\mathcal A_2\) \(\mathcal S\)-Struktur und \(\mathcal A_2\) modelliert den Graph \(G_2\).
+\subsection*{HA 4}
+\subsubsection*{i = 0)}
+\subsubsection*{i = 1)}
+\end{document}
