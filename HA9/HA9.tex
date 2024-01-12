@@ -95,22 +95,17 @@ Somit sind Induktionsbasis und Induktionsschritt gezeigt. \qed
 \pagebreak
 \subsection*{A4}
 \vor \(\Phi \subseteq F_{AL}\) und \(\varphi \in F_{AL}\). \(\Phi \cup \{\lnot \varphi\}\) unerfüllbar. \\
-\beh \(\Phi \vDash \varphi\) genau dann, wenn \(\Phi \cup \{\lnot \varphi\}\) unerfüllbar.\\
-\bew Wenn \(\Phi \cup \{\lnot \varphi\}\) unerfüllbar ist, gilt \(\lb \Phi \cup \{\lnot \varphi\}\rb_{\beta}=0\) wegen der 
+\beh \(\Phi \vDash \varphi\) \\
+\bew Wenn  Es gilt \(\lb \Phi \cup \{\lnot \varphi\}\rb_{\beta}=0\) wegen der 
 Definition von Erfüllbarkeit. Betrachte zwei Fälle:\\
 \textbf{(1)} \(\lb \Phi \rb_{\beta} = 1\).\\
-Damit \(\lb \Phi \cup \{\lnot \varphi\} \rb_{\beta} = 0\) gelten kann, muss \(\lb \lnot \varphi \rb_{\beta} = 1\) gelten. 
+Damit \(\lb \Phi \cup \{\lnot \varphi\} \rb_{\beta} = 0\) gelten kann, muss \(\lb \lnot \varphi \rb_{\beta} = 0\) gelten, da \(\Phi \cup \{\lnot \varphi\} \LeftrightvDash (\lnot \Phi) \wedge \lnot \varphi\). 
 Daraus folgt \(\lb \varphi \rb_{\beta} = 1\). Dann gilt \(\Phi \vDash \varphi\), da \(\lb \Phi \rb_{\beta} = 1\), also 
 \(\beta \vDash \Phi\), und \(\lb \varphi \rb_{\beta} = 1\), also \(\beta \vDash \varphi\). \\
 \textbf{(2)} \(\lb \Phi \rbb = 0\)\\
-Damit \(\lb \Phi \cup \{\lnot \varphi\} \rbb = 0\) gelten kann, muss \(\lb \varphi \rbb = 1\) gelten. Dann gilt auch 
-\(\lb \varphi \rbb = 0\). \\
-Dann wissen wir acuh, dass es keine passende Belegung \(\beta\) für \(\Phi\) und \(\varphi\) gibt, sodass \(\lb \Phi \rbb = 1\) 
-und \(\lb \varphi \rbb = 1\) gelten. Es gilt also auf Grund der Nicht-Existenz von passenden Belegungen \(\beta\): \\
-\(\Phi \vDash \varphi\).\\
+Für \(\lb \Phi \cup \{\lnot \varphi\} \rbb = 0\) ist der Wert von \(\varphi\) egal. 
+Es gilt \(\lb \Phi \rbb = 0 \Rightarrow \Phi \vDash \varphi\).\\
 \qed
-
-\pagebreak
 
 \subsection*{A6}
 \subsubsection*{a)}
