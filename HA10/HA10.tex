@@ -25,6 +25,12 @@
 \newcommand*{\bew}{\textbf{Bew.:} \gap}
 % Hab länger gebraucht um zu realisieren, dass das ne gute Idee wäre
 \newcommand*{\R}{\mathbb R}
+% Das hier wird sehr nett werden
+\newcommand*{\vDashR}{\mathrel{\reflectbox{\(\vDash\)}}}
+\newcommand*{\LeftrightvDash}{\vDash\vDashR}
+\newcommand{\lb}{\llbracket}
+\newcommand{\rb}{\rrbracket}
+\newcommand{\rbb}{\rrbracket_{\beta}}
 
 \newenvironment{noalign*}
  {\setlength{\abovedisplayskip}{0pt}\setlength{\belowdisplayskip}{0pt}%
@@ -49,11 +55,33 @@
 \begin{document}
 \maketitle
 
-\doublespacing
+\singlespacing
 \vspace*{-2cm}
 \subsection*{HA 1}
+Vorberechnung: \\
+Um beide Beweise etwas kürzer zu machen, führen wir eine Resolution durch von \(\Phi\), da wir in a) und b) genau die gleichen Schritte nochmal sonst machen würden nur mit noch eingefügten Formeln.\\
+\begin{noalign*}
+    & 1 & \{X_0\} & & \text{Voraussetzung} \\
+    & 2 & \{\neg X_0, X_1\} & & \text{Voraussetzung} \\
+    & 3 & \{X_1\} & & \text{Resolution mit \(X_0\) aus 1 und 2} \\
+    & 4 & \{\neg X_1, X_3\} & & \text{Voraussetzung} \\
+    & 5 & \{X_3\} & & \text{Resolution mit \(X_1\) aus 3 und 4} \\
+    & 6 & \{\neg X_2, X_4\} & & \text{Voraussetzung} \\
+    & 7 & \{\neg X_4, X_3\} & & \text{Voraussetzung} \\
+    & 8 & \{\neg X_2, X_3\} & & \text{Resolution mit \(X_4\) aus 6 und 7} \\
+    & 9 & \{\neg X_4, X_2\} & & \text{Voraussetzung} \\
+    & 10 & \{\neg X_4, X_3\} & & \text{Resolution mit \(X_2\) aus 8 und 9} \\
+\end{noalign*}
+Es bleibt nur noch die Klauselmenge \(\{\{X_3\}, \{\neg X_4, X_3\}\}\). \\
+Beobachte: \(\bigwedge\bigvee\{\{X_3\}, \{\neg X_4, X_3\}\} \LeftrightvDash \bigwedge\bigvee\{\{X_3\}\}\) aufgrund der Konjunktion.
 \subsubsection*{a)}
+Wir wenden alle Resolutionsschritte und die Umformung zuletzt auf \(\Phi \cup \{\neg X_3\}\) an, und erhalten \(\bigwedge\bigvee\{\{X_3\}, \{\neg X_3\}\} \vDash \bot\).\\
+Nach Lemma ist \(\Phi \vDash X_3\) gezeigt. \qed
 \subsubsection*{b)}
+Wir wenden alle Resolutionsschritte und die Umformung zuletzt auf \(\Phi \cup \{\neg X_4\}\) an, und erhalten \(\bigwedge\bigvee\{\{X_3\}, \{\neg X_4\}\}\) also \(X_3 \wedge X_4\).\\
+Da keine Resolutionsschritte mehr anwendbar sind\\
+und offenbar nicht \(X_3 \wedge \neg X_4 \vDash \bot\) gilt (Siehe Belegung \(\beta := \{X_3 \mapsto 1, X_4 \mapsto 0\}\)), \\
+können wir nicht schlussfolgern \(\Phi \vDash X_4\), jedoch da das Resolutionskalkül vollständig ist, können wir \(\Phi \vDash X_4\) ausschließen. \qed
 \subsection*{HA 2}
 \subsubsection*{a)}
 \(t_1\) ist \(\mathcal S\)-Term, hier werden alle Formalismen für die Signatur \(\mathcal S\) eingehalten. \\
